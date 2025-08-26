@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://jacobsschool.ucsd.edu/">
-    *ADD PHOTO OF CAR HERE*
+  <img src="https://github.com/UCSD-ECEMAE-148/winter-2024-final-project-team-4/blob/main/images/UCSDLogo_JSOE_BlueGold.png" alt="Logo" width="400" height="100">
   </a>
 <h3>ECE/MAE148 Final Project</h3>
 <p>
@@ -14,6 +14,7 @@ Team 5 Summer 2025
 </p>
 
 <img src="images/ROBOCAR.jpg" alt="Logo" width="400" height="400">
+*Change src part for our image of the car*
 </div>
 
 
@@ -23,7 +24,7 @@ Team 5 Summer 2025
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#overview">Overview</a>
+    <li><a href="#overview">Overview</a></li>
       <ul>
         <li><a href="#key-features">Key Features</a></li>
       </ul>
@@ -71,6 +72,7 @@ Team 5 Summer 2025
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
 ## Overview
 
 This project focuses on developing an imaging process filter designated to improve the reliability of Donkey Car training across different environments. An image filter pipeline will be made to the OAK-D camera feed to normalize lighting conditions so that training and inference remain robust at any time of day.
