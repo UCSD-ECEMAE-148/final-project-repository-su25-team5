@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://jacobsschool.ucsd.edu/">
-    <img src="https://github.com/UCSD-ECEMAE-148/winter-2024-final-project-team-4/blob/main/images/UCSDLogo_JSOE_BlueGold.png" alt="Logo" width="400" height="100">
+    *ADD PHOTO OF CAR HERE*
   </a>
 <h3>ECE/MAE148 Final Project</h3>
 <p>
@@ -78,7 +78,7 @@ In addition, we will integrate LiDAR sensing for obstacle detection and mapping,
 We will use ROS2 as the link to filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
 
-#Add links to videos needed in order to make a good overview
+*Add links to videos needed in order to make a good overview*
 
 
 ### **Key Features**
@@ -103,57 +103,26 @@ We will use ROS2 as the link to filters and LiDAR sensing, where filtered camera
 ## **Project Goals**
 
 ### **Core Objectives**
-1. **Ball Tracking and Control:**
-   - Implement a tracking node that uses DepthAI to:
-     - Deploy a YOLO model directly to OAK-D Lite camera, detecting a soccer ball in frame.
-     - Measure:
-       - `Ball Depth`: Average distance between the ball and the robot in millimeters.
-       - `Ball Angle`: Horizontal offset angle from the robot's center.
-   - Publish data to VESC BLDC Motor Controller:
-       - ```throttle``` variable via bang-bang controller.
-       - ```angle``` variable, represent's angular offset between ball and car, normalized between -1 and 1 using camera's horizontal FOV. 
+1. **Filtering:**
+   - Implement a filter that
 
-3. **Goalkeeper Rules:**
-   - Ensure the robot remains stationary until the ball begins moving (mimicking real penalty-kick rules).
-   - React swiftly to block the ball once it starts moving.
+2. **Goal 2**
 
 ### **Nice-to-Have Features**
-- **Path Prediction:**
-  - Use ball position and velocity data to predict the trajectory and intercept the ball optimally.
-  - Incorporate robot dynamics to determine the ideal intercept point.
   
 ---
 
 ## **System Architecture**
 
-The project leverages a modular architecture, where each node in the ROS2 framework is responsible for specific tasks. 
-
 ### **Node Descriptions**
 
-1. **```yolo_node.py```**
-   - **Inputs:** Camera feed from OAK-D Lite.
-   - **Measures:** 
-     - Ball Depth: (distance in mm).
-     - Ball Angle: (horizontal angle between ball and camera in radians or degrees).
-   - **Outputs:**
-     - Twist messages to the ```\cmd_vel``` topic
-     - ```linear.x``` messages represent throttle commands
-     - ```angular.z``` messages represent servo commands. These message are Ball Angle data normalized between -1 and 1.
+1. 
 
-2. **```vesc_twist_node.py```**
-   - **Inputs:** 
-     - ```linear.x``` and ```angular.z``` messages from the ```yolo_node.py```.
-   - **Outputs:**
-     - Commands to the VESC for motor control.
+2. 
 
 ---
 
 ## **Technologies Used**
-
-- **DepthAI:** For object detection, depth estimation, and spatial tracking of the soccer ball.
-- **OpenCV:** To process image frames and detect circular objects.
-- **ROS2:** Middleware framework for data publishing and subscribing between nodes.
-- **VESC:** Controls the robot's drivetrain, providing precise throttle and steering.
 
 ---
 
@@ -196,8 +165,7 @@ __Detailed instructions can be found in ball_vision_info.md__
 
 ### Final Project Documentation
 
-* [Final Project Presentation](https://docs.google.com/presentation/d/1sWPAhDD-GJ9jYpHarSCKPhVNQmTzqOHTQWOG0NPXQyo/edit?usp=sharing)
-* [Project Proposal](https://docs.google.com/presentation/d/1Lm3S6NN71KebaZToWxZiezmuwGJY3F4DBKpGaalPcTA/edit?usp=sharing)
+* [Final Project Presentation](https://docs.google.com/presentation/d/19Qnh-O2huFwSPowrSBKmezatQEWL6zlXS5n7mhxw9v8/edit?usp=sharing)
 
 <!-- Early Quarter -->
 ## Robot Design
@@ -207,8 +175,10 @@ __Detailed instructions can be found in ball_vision_info.md__
 #### Custom Designed Parts
 | Part | CAD Model | Designer |
 |------|--------------|------------|
-| Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Evan
-| LiDAR Case | <img src="images/LiDAR Case.png" width="300" height="202" /> | Gautam
+| Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
+| LiDAR Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
+| GPS Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
+| VESC Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
 
 
 #### Open Source Parts
@@ -222,7 +192,7 @@ __Detailed instructions can be found in ball_vision_info.md__
 Circuit Diagram of the electronic hardware setup for the car.
 
 <img src="https://github.com/kiers-neely/ucsd-mae-148-team-4/assets/161119406/6f7501ee-382a-4590-9c0a-f8ce738efec3" width="800" height="400" />
-
+*Special thanks to Omar for soldering and fixing the broken components*
 
 ### Software
 #### Embedded Systems
