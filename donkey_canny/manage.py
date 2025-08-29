@@ -190,7 +190,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 outputs += ['lidar/dist_array']
             
         V.add(cam, inputs=inputs, outputs=outputs, threaded=threaded)
-	V.add(CannyPart(low_threshold=100, high_threshold=200),inputs=['cam/image_array'],outputs=['cam/image_array'])
+	    V.add(CannyPart(low_threshold=100, high_threshold=200),inputs=['cam/image_array'],outputs=['cam/image_array'])
 
     # add lidar
     if cfg.USE_LIDAR:
