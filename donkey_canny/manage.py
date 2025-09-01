@@ -32,6 +32,7 @@ from donkeycar.parts.file_watcher import FileWatcher
 from donkeycar.parts.launch import AiLaunch
 from donkeycar.utils import *
 from canny_part import CannyPart
+#from Ros_control.donkey_bridge import ROS2CommandPart
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -864,6 +865,13 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
             print("You can now move your joystick to drive your car.")
             ctr.set_tub(tub_writer.tub)
             ctr.print_controls()
+
+
+    # ros_part = ROS2CommandPart()
+    # V.add(ros_part,
+    #     inputs=[],  # this part does not depend on other DonkeyCar parts
+    #     outputs=['user/angle', 'user/throttle'],  # publishes to DonkeyCar pipeline
+    #     threaded=True)  # run in its own thread so ROS spin() doesn’t block
 
     # run the vehicle
     V.start(rate_hz=cfg.DRIVE_LOOP_HZ, max_loop_count=cfg.MAX_LOOPS)
