@@ -533,11 +533,16 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 return pilot_angle if pilot_angle else 0.0, \
                        pilot_throttle * cfg.AI_THROTTLE_MULT \
                            if pilot_throttle else 0.0
+            
+    # V.add(safety,
+    #   inputs=['pilot/angle', 'pilot/throttle', 'sensor_inputs'],
+    #   outputs=['pilot/angle', 'pilot/throttle'])
 
     V.add(DriveMode(),
           inputs=['user/mode', 'user/angle', 'user/throttle',
                   'pilot/angle', 'pilot/throttle'],
           outputs=['angle', 'throttle'])
+    
 
 
     #to give the car a boost when starting ai mode in a race.
@@ -779,6 +784,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                       cfg.VESC_STEERING_SCALE,
                       cfg.VESC_STEERING_OFFSET
                     )
+        
         V.add(vesc, inputs=['angle', 'throttle'])
 
     # OLED setup
