@@ -1,16 +1,20 @@
-#TODO borrow from other group need to adjust/polished base on our own car
+#TODO 148-spring-2025-final-project-team-15
+v
 
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from sensor_msgs.msg import LaserScan
+
 import math
 
 class ObstacleDecision(Node):
     def __init__(self):
         super().__init__('obstacle_decision')
+
         self.sub = self.create_subscription(LaserScan, '/scan', self.scan_callback, 10)
-        self.pub = self.create_publisher(String, '/lidar_status', 10)
+        self.lidar_pub = self.create_publisher(String, '/lidar_status', 10)
+
 
     def scan_callback(self, msg):
         ranges = msg.ranges
@@ -54,7 +58,7 @@ class ObstacleDecision(Node):
             else:
                 msg_out.data = "RIGHT"
         else:
-            msg_out.data = "No obstacle. FORWARD."
+            msg_out.data = "FORWARD."
 
         self.pub.publish(msg_out)
 

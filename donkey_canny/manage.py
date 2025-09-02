@@ -252,7 +252,14 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 inputs=['cam/image_array', 'user/mode', 'recording'], 
                 outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
                 threaded=True)
-        
+            
+            # from my_safety import SafetyOverridePart
+            # safety = SafetyOverridePart()
+            # V.add(
+            #     safety,
+            #     inputs=['user/angle', 'user/throttle', 'fusion/decision'], 
+            #     outputs=['user/angle', 'user/throttle']
+            # )
 
     #this throttle filter will allow one tap back for esc reverse
     th_filter = ThrottleFilter()
