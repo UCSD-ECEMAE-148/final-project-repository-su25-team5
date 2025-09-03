@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-    <name>ros_control_pkg</name>
-    <version>0.0.0</version>
-    <description>The ros_control_pkg package</description>
-    <maintainer email="zhj014@ucsd.edu">Zhenyu Jiang</maintainer>
-    <dependency>rclpy</dependency>
-<launch>
-    <node pkg="ros_control_pkg" exec="donkey_bridge_node" name="donkey_bridge" output="screen"/>
-    <node pkg="ros_control_pkg" exec="Safety_override_node" name="safety_override" output="screen"/>
-    <node pkg="ros_control_pkg" exec="smart_avoid_node" name="smart_avoid" output="screen"/>
-</launch>
+  <name>ros_control_pkg</name>
+  <version>0.0.0</version>
+  <description>The ros_control_pkg package</description>
+  <maintainer email="zhj014@ucsd.edu">Zhenyu Jiang</maintainer>
+  <license>MIT</license>
+
+  <depend>rclpy</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

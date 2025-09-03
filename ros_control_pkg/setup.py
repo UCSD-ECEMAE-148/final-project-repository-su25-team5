@@ -21,9 +21,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'donkey_bridge_node = Ros_control_pkg.donkey_bridge:main',
-            'Safety_override_node = Ros_control_pkg.safety_override:main',
-            'smart_avoid_node = Ros_control_pkg.smart_avoid:main',
+            'donkey_bridge_node = ros_control_pkg.donkey_bridge:main',
+            'Safety_override_node = ros_control_pkg.safety_override:main',
+            'smart_avoid_node = ros_control_pkg.smart_avoid:main',
         ],
     },
 )
