@@ -1,4 +1,6 @@
 from setuptools import setup
+import os
+from glob import glob
 
 package_name = 'ros_control_pkg'
 
@@ -10,7 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/safety_override_system.launch.py']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -22,7 +24,7 @@ setup(
     entry_points={
         'console_scripts': [
             'donkey_bridge_node = ros_control_pkg.donkey_bridge:main',
-            'Safety_override_node = ros_control_pkg.safety_override:main',
+            'safety_override_node = ros_control_pkg.safety_override:main',
             'smart_avoid_node = ros_control_pkg.smart_avoid:main',
         ],
     },
