@@ -1,5 +1,4 @@
 #TODO 148-spring-2025-final-project-team-15
-v
 
 import rclpy
 from rclpy.node import Node
