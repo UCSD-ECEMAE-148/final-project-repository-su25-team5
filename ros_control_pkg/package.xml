@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="Ros_control_pkg" exec="donkey_bridge_node" name="donkey_bridge" output="screen"/>
+    <node pkg="Ros_control_pkg" exec="Safety_override_node" name="safety_override" output="screen"/>
+    <node pkg="Ros_control_pkg" exec="smart_avoid_node" name="smart_avoid" output="screen"/>
+</launch>
