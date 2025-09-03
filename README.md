@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-<h1 align="center">Image Filter Pipeline</h1>
+<h1 align="center">Image Filter Pipeline & Obstacle Avoidance</h1>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -76,20 +76,18 @@ Team 5 Summer 2025
 ## Overview
 
 This project focuses on developing an imaging process filter designated to improve the reliability of Donkey Car training across different environments. An image filter pipeline will be made to the OAK-D camera feed to normalize lighting conditions so that training and inference remain robust at any time of day.
-In addition, we will integrate LiDAR sensing for obstacle detection and mapping, further improving the perception capabilities of the Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
-We will use ROS2 as the link to filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
+In addition, LiDAR sensing will be integrated for obstacle detection and mapping, further improving the perception capabilities of Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
+ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
 
 *Add links to videos needed in order to make a good overview*
 
 
 ### **Key Features**
-- **1**
-- **2**
-- **3**
-- **4**
-- **5**
-
+- **Image Filtering:** Imaging is captured, enhanced, lifted, blurred, gray scaled, then a canny edge filter is applied.
+- **Obstacle Avoidance:** LiDAR, or light detection and ranging, is used to measure distances between the car and objects in order to avoid collisions.
+- **ROS2 Framework:** Custom ROS2 nodes are used for the functionalities listed above.
+- **Donkey Car Framework:** Uses the OpenAI gym wrapper around the Self Driving Sandbox donkey simulator in order for deep learning image processing, allowing the use for autonomous use.
 ---
 
 ## Team Members
@@ -105,10 +103,11 @@ We will use ROS2 as the link to filters and LiDAR sensing, where filtered camera
 ## **Project Goals**
 
 ### **Core Objectives**
-1. **Filtering:**
-   - Implement a filter that
+1. **Image Filtering:**
+   - Implement a multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
 
-2. **Goal 2**
+2. **Obstacle Avoidance:**
+   - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to ```stop``` or ```turn``` away from obstacles.
 
 ### **Nice-to-Have Features**
   
