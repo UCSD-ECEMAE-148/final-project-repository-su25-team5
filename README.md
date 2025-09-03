@@ -110,10 +110,9 @@ ROS2 will be used as the link between filters and LiDAR sensing, where filtered 
    - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to ```stop``` or ```turn``` away from obstacles.
 
 ### **Nice-to-Have Features**
-  
+- **Faster obstacle avoidance:**
+   - Have the robot car react faster to obstacles and in turn be able to react to moving obstacles.
 ---
-
-## **System Architecture**
 
 ### **Node Descriptions**
 
@@ -124,16 +123,20 @@ ROS2 will be used as the link between filters and LiDAR sensing, where filtered 
 ---
 
 ## **Technologies Used**
-
+- **ROS2:** Framework for data between nodes i.e. the image filter and camera pipeline, as well as the LiDAR for detecting obstacles.
+- **Donkey Car:** Donkey Simulator is implemented into the ROS2 framework in order for deep-learning of the filtered imaging, allowing for autonomous driving.
+- **VESC:** Controls the car, allowing steering and throttle necessary for obstacle avoidance.
+  
 ---
 
 ## **How to Run**
 
-__Detailed instructions can be found in ball_vision_info.md__
+__Detailed instructions can be found in ...__
 
 ### **Prerequisites**
-- Install ROS2 (Foxy recommended).
-- Set up the DepthAI SDK.
+- Install NoMachine for connection to Nvidia Jetson Nano Developer Kit
+- Install ROS2 (Foxy recommended) on the Jetson
+- Set up the DepthAI SDK
   - In Docker container ```projects``` directory
   ```bash
   git clone https://github.com/luxonis/depthai-python
