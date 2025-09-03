@@ -180,23 +180,23 @@ __Detailed instructions can be found in ...__
 | Part | CAD Model | Designer |
 |------|--------------|------------|
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
-| LiDAR Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
-| GPS Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
-| VESC Mount | <img src="images/LiDAR Case.png" width="300" height="202" /> | Angel
+| LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="202" /> | Angel
+| GPS Mount | <img src="images/GPS Stand.png" width="300" height="202" /> | Angel
+| VESC Mount | <img src="images/VESC Holder.png" width="300" height="202" /> | Angel
 
 
 #### Open Source Parts
 | Part | CAD Model | Source |
 |------|--------|-----------|
-| Jetson Nano Case | <img src="images/Jetson Case.png" width="300" height="214" /> | [Thingiverse](https://www.thingiverse.com/thing:5237669) |
+| Jetson Nano Case | <img src="images/Jetson Nano Cover.png" width="300" height="214" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
 | Oak-D Lite Case | <img src="images/Camera Case.png" width="300" height="250" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
 
 
 ### Electronic Hardware
-Circuit Diagram of the electronic hardware setup for the car.
+Circuit Diagram of the electronics for the car.
 
-<img src="https://github.com/kiers-neely/ucsd-mae-148-team-4/assets/161119406/6f7501ee-382a-4590-9c0a-f8ce738efec3" width="800" height="400" />
-*Special thanks to Omar for soldering and fixing the broken components*
+<img src="images/ECE 148 Schematics" width="800" height="400" />
+*Special thanks to Omar for soldering & fixing the broken components as well as organizing them*
 
 ### Software
 #### Embedded Systems
