@@ -1,0 +1,15 @@
+# Donkey Car data
+data/
+tubs/
+models/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ROS2 build folders
+build/
+install/
+log/
