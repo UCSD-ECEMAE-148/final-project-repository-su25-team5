@@ -20,7 +20,7 @@ class FusionNode(Node):
 
     def lidar_callback(self, msg):
         self.lidar_status = msg.data
-	self.get_logger().info(f"lidar: {msg.data}")
+        self.get_logger().info(f"lidar: {msg.data}")
         self.make_decision()
 
     def camera_callback(self, msg):
