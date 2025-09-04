@@ -13,14 +13,14 @@ class FusionNode(Node):
 
         # Subscribers
         self.create_subscription(String, '/camera_status', self.camera_callback, 10)
-        self.create_subscription(LaserScan, '/lidar_status', self.lidar_callback, 10)
+        self.create_subscription(String, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
         self.pub = self.create_publisher(String, '/cmd_vel2', 10)
 
     def lidar_callback(self, msg):
         self.lidar_status = msg.data
-        self.get_logger().info(f"lidar: {msg.data}")
+        #self.get_logger().info(f"lidar: {msg.data}")
         self.make_decision()
 
     def camera_callback(self, msg):
@@ -30,8 +30,9 @@ class FusionNode(Node):
     def make_decision(self):
         if self.lidar_status is None or self.camera_status is None:
             return  # wait until both sensors provide data
+	# decision = "FORWARD"
+	self.get_logger().info(f"lidar: {msg.data}")
 
-        # decision = "FORWARD"
         # Rule 1: Safety first
         if self.lidar_status == "STOP":
             # decision = "STOP"
