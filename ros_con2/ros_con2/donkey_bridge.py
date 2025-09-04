@@ -19,7 +19,7 @@ class DonkeyBridge(Node):
 
         # Timer to periodically publish sensor data
         timer_period = 0.1  # 10 Hz
-        self.timer = self.create_timer(timer_period, self.publish_sensors)
+        #self.timer = self.create_timer(timer_period, self.publish_sensors)
 
         self.get_logger().info("DonkeyBridge node started.")
 
@@ -34,10 +34,10 @@ class DonkeyBridge(Node):
         else:
             self.get_logger().warn("No DonkeyCar handle attached!")
 
-    def publish_sensors(self):
-        # Example: publish dummy sensor data
-        self.get_logger().info("Publishing sensors...")
-        # You can add actual publishing here
+    # def publish_sensors(self):
+    #     # Example: publish dummy sensor data
+    #     self.get_logger().info("Publishing sensors...")
+    #     # You can add actual publishing here
 
 
 def main(args=None):
