@@ -182,7 +182,7 @@ __Detailed instructions can be found in ...__
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
 | LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
 | GPS Mount | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
-| VESC Mount | <img src="images/VESC Holder.png" width="275" height="202" /> | Angel
+| VESC Mount | <img src="images/VESC Holder.png" width="235" height="202" /> | Angel
 
 
 #### Open Source Parts
