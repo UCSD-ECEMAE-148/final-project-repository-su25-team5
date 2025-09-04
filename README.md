@@ -196,7 +196,7 @@ __Detailed instructions can be found in ...__
 ### Electronic Hardware
 Circuit Diagram of the electronics for the car.
 
-<img src="images/ECE 148 Schematics.png" width="800" height="400" />
+<img src="images/ECE 148 Schematics.jpg" width="800" height="400" />
 *Special thanks to Omar for soldering & fixing the broken components as well as organizing them*
 
 ### Software
