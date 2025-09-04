@@ -41,8 +41,8 @@ class ObstacleDecision(Node):
 
         # Define sectors (adjust angles if needed for your setup)
         front_sector = get_sector(330, 30)
-        left_sector = get_sector(60, 120)
-        right_sector = get_sector(240, 300)
+        left_sector = get_sector(30, 150)
+        right_sector = get_sector(210, 330)
 
         msg_out = String()
 
@@ -50,7 +50,7 @@ class ObstacleDecision(Node):
             clear_left = self.count_clear(left_sector)
             clear_right = self.count_clear(right_sector)
 
-           # self.get_logger().info(f"Obstacle ahead. min: {msg.angle_min}, max:{msg.angle_max} Left: {clear_left}, Right: {clear_right}")
+            self.get_logger().info(f"Obstacle ahead. min: {msg.angle_min}, max:{msg.angle_max} Left: {clear_left}, Right: {clear_right}")
 
             if clear_left > clear_right:
                 msg_out.data = "LEFT"

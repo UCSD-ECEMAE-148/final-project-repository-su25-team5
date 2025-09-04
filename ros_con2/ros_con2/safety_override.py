@@ -10,6 +10,8 @@ class FusionNode(Node):
         super().__init__('fusion_node')
         self.lidar_status = None
         self.camera_status = None
+        self.car_steering = 0
+        self.car_acc = 0
 
         # Subscribers
         self.create_subscription(String, '/camera_status', self.camera_callback, 10)
@@ -28,36 +30,37 @@ class FusionNode(Node):
         self.make_decision()
 
     def make_decision(self):
-        if self.lidar_status is None or self.camera_status is None:
+        if self.lidar_status is None: #or self.camera_status is None:
             return  # wait until both sensors provide data
 	# decision = "FORWARD"
-	self.get_logger().info(f"lidar: {msg.data}")
+        self.car_acc = 0.5
+        self.get_logger().info(f"lidar: {self.lidar_status}")
 
         # Rule 1: Safety first
         if self.lidar_status == "STOP":
             # decision = "STOP"
-            car_acc = 0.0
-            car_steering = 0.0
+            self.car_acc = 0.0
+            self.car_steering = 0.0
 
         # Rule 2: Pedestrian always STOP
-        elif "PEDESTRIAN" in self.camera_status.upper():
-            car_acc = 0.0
-            car_steering = 0.0
+        #elif "PEDESTRIAN" in self.camera_status.upper():
+           # car_acc = 0.0
+           # car_steering = 0.0
 
         # Rule 4: Obstacle left/right/slow down
         elif self.lidar_status in ["LEFT", "RIGHT"]:
             # if the car see stuff on the left
             if self.lidar_status == "LEFT":
-                car_steering = 0.5
-                car_acc = 0.2
+                self.car_steering = 0.5
+                self.car_acc = 0.2
             # if the car see stuff on the right
             else:
-                car_steering = -0.5
-                car_acc = 0.2
+                self.car_steering = -0.5
+                self.car_acc = 0.2
 
         # Publish final
         msg_out = String()
-        msg_out.data = f"STEERING:{car_steering},ACC:{car_acc}"
+        msg_out.data = f"STEERING:{self.car_steering},ACC:{self.car_acc}"
         self.pub.publish(msg_out)
         self.get_logger().info(f"Fusion Decision: {msg_out.data} "
                                f"(LIDAR={self.lidar_status}, CAMERA={self.camera_status})")
