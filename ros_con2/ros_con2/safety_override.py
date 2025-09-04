@@ -60,7 +60,9 @@ class FusionNode(Node):
 
         # Publish final
         msg_out = String()
-        msg_out.data = f"STEERING:{self.car_steering},ACC:{self.car_acc}"
+        # msg_out.data = f"STEERING:{self.car_steering},THROTTLE:{self.car_acc}"
+        msg_out.data = f"THROTTLE:{self.car_acc},STEERING:{self.car_steering}"
+
         self.pub.publish(msg_out)
         self.get_logger().info(f"Fusion Decision: {msg_out.data} "
                                f"(LIDAR={self.lidar_status}, CAMERA={self.camera_status})")
