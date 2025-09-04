@@ -181,7 +181,8 @@ __Detailed instructions can be found in ...__
 |------|--------------|------------|
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
 | LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
-| GPS Mount (Although not used in final project, was used earlier in the quarter) | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
+| GPS Mount 
+(Not used in final project but used earlier in the quarter) | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
 | VESC Mount | <img src="images/VESC Holder.png" width="235" height="202" /> | Angel
 
 
@@ -195,7 +196,7 @@ __Detailed instructions can be found in ...__
 ### Electronic Hardware
 Circuit Diagram of the electronics for the car.
 
-<img src="images/ECE 148 Schematics" width="800" height="400" />
+<img src="images/ECE 148 Schematics.png" width="800" height="400" />
 *Special thanks to Omar for soldering & fixing the broken components as well as organizing them*
 
 ### Software
