@@ -34,6 +34,11 @@ class DonkeyBridge(Node):
         else:
             self.get_logger().warn("No DonkeyCar handle attached!")
 
+    def publish_sensors(self):
+        # Example: publish dummy sensor data
+        self.get_logger().info("Publishing sensors...")
+        # You can add actual publishing here
+
 
 def main(args=None):
     rclpy.init(args=args)
