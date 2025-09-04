@@ -13,8 +13,7 @@
 Team 5 Summer 2025
 </p>
 
-<img src="images/ROBOCAR.jpg" alt="Logo" width="400" height="400">
-*Change src part for our image of the car*
+<img src="images/Team 5 RoboCar.jpg" alt="Logo" width="400" height="400">
 </div>
 
 
