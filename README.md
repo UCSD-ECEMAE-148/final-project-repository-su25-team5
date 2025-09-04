@@ -125,7 +125,7 @@ ROS2 will be used as the link between filters and LiDAR sensing, where filtered 
 ## **Technologies Used**
 - **ROS2:** Framework for data between nodes i.e. the image filter and camera pipeline, as well as the LiDAR for detecting obstacles.
 - **Donkey Car:** Donkey Simulator is implemented into the ROS2 framework in order for deep-learning of the filtered imaging, allowing for autonomous driving.
-- **VESC:** Controls the car, allowing steering and throttle necessary for obstacle avoidance.
+- **VESC:** Controls the car'ss teering and throttle which is necessary for obstacle avoidance.
   
 ---
 
@@ -180,9 +180,9 @@ __Detailed instructions can be found in ...__
 | Part | CAD Model | Designer |
 |------|--------------|------------|
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
-| LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="202" /> | Angel
-| GPS Mount | <img src="images/GPS Stand.png" width="300" height="202" /> | Angel
-| VESC Mount | <img src="images/VESC Holder.png" width="300" height="202" /> | Angel
+| LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
+| GPS Mount | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
+| VESC Mount | <img src="images/VESC Holder.png" width="275" height="202" /> | Angel
 
 
 #### Open Source Parts
@@ -200,11 +200,13 @@ Circuit Diagram of the electronics for the car.
 
 ### Software
 #### Embedded Systems
-Our team utilized a wirless SSH to a Jetson Nano that contained a docker container with all the necessary packages and dependecies used to run our program in a ROS2 workspace. SSH was done via both Mac terminal and Windows PC with Virtual Machine.
+A wireless SSH connection was established with the Jetson Nano that contained a docker container with all the necessary packages and dependecies used to run programs in a ROS2 workspace. Connection of our host computers and the Jetson were used through NoMachine for Windows and Liinux terminals.
 
 #### ROS2
-The Docker Images, which were provided to us and pulled from the Docker Hub, contained the UCSD Robocar Module along with the ROS/ROS2 submodules that we utilized during project prototyping and lane following.
-The UCSD Robocar Module, running on Linux OS (Ubuntu 20.04), was initially developed by Dominic Nightingale, a graduate student at the University of California, San Diego
+The Docker Images, which were provided to us and pulled from the Docker Hub, contained the UCSD Robocar Module along with the ROS/ROS2 submodules that we utilized.
+The UCSD Robocar Module runs on Linux OS (Ubuntu 20.04) and was initially developed by Dominic Nightingale, a graduate student at the University of California, San Diego.
+
+*Special thanks to Zhenyu for addressing software concerns and commiting to working on the ROS2 framework.*
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
