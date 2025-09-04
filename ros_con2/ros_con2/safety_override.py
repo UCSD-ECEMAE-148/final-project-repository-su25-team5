@@ -13,7 +13,7 @@ class FusionNode(Node):
 
         # Subscribers
         self.create_subscription(String, '/camera_status', self.camera_callback, 10)
-        self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
+        self.create_subscription(LaserScan, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
         self.pub = self.create_publisher(String, '/cmd_vel', 10)
