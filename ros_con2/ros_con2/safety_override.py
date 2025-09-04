@@ -20,6 +20,7 @@ class FusionNode(Node):
 
     def lidar_callback(self, msg):
         self.lidar_status = msg.data
+	self.get_logger().info(f"lidar: {msg.data}")
         self.make_decision()
 
     def camera_callback(self, msg):
@@ -60,7 +61,6 @@ class FusionNode(Node):
         self.get_logger().info(f"Fusion Decision: {msg_out.data} "
                                f"(LIDAR={self.lidar_status}, CAMERA={self.camera_status})")
 
-        
 
 def main(args=None):
     rclpy.init(args=args)
