@@ -59,7 +59,7 @@ class ObstacleDecision(Node):
         else:
             msg_out.data = "FORWARD."
 
-        self.pub.publish(msg_out)
+        self.lidar_pub.publish(msg_out)
 
     def count_clear(self, sector):
         """Count how many values are reasonably clear (0.5m to 3.5m)"""
