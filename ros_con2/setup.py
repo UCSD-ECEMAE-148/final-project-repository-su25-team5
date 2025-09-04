@@ -22,9 +22,9 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': ['donkey_bridge_node = ros_control_pkg.donkey_bridge:main',
-            'safety_override_node = ros_control_pkg.safety_override:main',
-            'smart_avoid_node = ros_control_pkg.smart_avoid:main',
+        'console_scripts': ['donkey_bridge_node = ros_con2.donkey_bridge:main',
+            'safety_override_node = ros_con2.safety_override:main',
+            'smart_avoid_node = ros_con2.smart_avoid:main',
         ],
     },
 )
