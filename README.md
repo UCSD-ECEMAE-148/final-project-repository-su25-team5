@@ -79,8 +79,9 @@ This project focuses on developing an imaging process filter designated to impro
 In addition, LiDAR sensing will be integrated for obstacle detection and mapping, further improving the perception capabilities of Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
 ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
+https://github.com/UCSD-ECEMAE-148/final-project-repository-su25-team5/blob/main/images/5%20PM%20Day%20Model%20Usage.mp4 
 
-*Add links to videos needed in order to make a good overview*
+https://github.com/UCSD-ECEMAE-148/final-project-repository-su25-team5/blob/main/images/Night%20Model%20Usage.mp4
 
 
 ### **Key Features**
@@ -182,7 +183,7 @@ __Detailed instructions can be found in ...__
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
 | LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
 | GPS Mount | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
-| VESC Mount | <img src="images/VESC Holder.png" width="275" height="202" /> | Angel
+| VESC Mount | <img src="images/VESC Holder.png" width="235" height="202" /> | Angel
 
 
 #### Open Source Parts
