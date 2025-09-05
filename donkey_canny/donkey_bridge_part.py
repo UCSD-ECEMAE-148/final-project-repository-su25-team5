@@ -1,13 +1,16 @@
-def run(self):
-    with self.lock:
-        if self.data_store.get("new_cmd", False):
-            angle = self.data_store.get("angle", 0.0)
-            throttle = self.data_store.get("throttle", 0.0)
-            self.data_store["new_cmd"] = False
-        else:
-            # No new ROS command: safe fallback values
-            angle = 0.0
-            throttle = 0.0
+import threading 
+class ROS2BridgePart: 
+    def __init__(self, data_store): 
+        """ 
+        data_store: a dict-like object shared between ROS2 node and DonkeyCar 
+        Example: {"angle": 0.0, "throttle": 0.0} 
+        """ 
+        self.data_store = data_store 
+        self.lock = threading.Lock() 
 
-    return float(angle), float(throttle)
-
+    def run(self): 
+        # Safely grab the latest values written by the ROS2 node 
+        with self.lock: 
+            angle = self.data_store.get("angle", 0.0) 
+            throttle = self.data_store.get("throttle", 0.0) 
+            return angle, throttle

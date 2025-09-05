@@ -247,19 +247,19 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                     netwkJs = JoyStickSub(cfg.NETWORK_JS_SERVER_IP)
                     V.add(netwkJs, threaded=True)
                     ctr.js = netwkJs
+                    
+            from donkey_bridge_part import ROS2BridgePart
+            from ros_con2.donkey_bridge import shared_data
+
+            # later in drive():
+            ros_part = ROS2BridgePart(shared_data)
+            V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
             V.add(
                 ctr, 
                 inputs=['cam/image_array', 'user/mode', 'recording'], 
                 outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
                 threaded=True)
             
-
-        from donkey_bridge_part import ROS2BridgePart
-        from ros_con2.donkey_bridge import shared_data
-
-        # later in drive():
-        ros_part = ROS2BridgePart(shared_data)
-        V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
 
 
     #this throttle filter will allow one tap back for esc reverse
