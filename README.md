@@ -115,7 +115,7 @@ Click to watch "Night Model Usage"
    - Implement a multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
 
 2. **Obstacle Avoidance:**
-   - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to ```stop``` or ```turn``` away from obstacles.
+   - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to stop or turn away from obstacles.
 
 ### **Nice-to-Have Features**
 - **Faster Obstacle Avoidance:**
