@@ -232,7 +232,6 @@ The UCSD Robocar Module runs on Linux OS (Ubuntu 20.04) and was initially develo
 
 <!-- CONTACTS -->
 ## Contacts
-
-* Omar Hernandez | o2hernandez@ucsd.edu
-* Zhenyu Jiang   | zhj014@ucsd.edu
-* Angel Rubio    | acrubio@ucsd.edu
+| Omar Hernandez | o2hernandez@ucsd.edu
+| Zhenyu Jiang   | zhj014@ucsd.edu
+| Angel Rubio    | acrubio@ucsd.edu
