@@ -21,7 +21,7 @@ Team 5 Summer 2025
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>#Table of Contents</summary>
   <ol>
     <li><a href="#overview">Overview</a></li>
       <ul>
