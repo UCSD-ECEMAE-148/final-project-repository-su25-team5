@@ -79,9 +79,7 @@ In addition, LiDAR sensing will be integrated for obstacle detection and mapping
 ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
 ### **YouTube Videos:**
-<div align="center">
-  <a href=[![Filter in Action](http://img.youtube.com/vi/sU_MpfjnF3E/0.jpg)](https://youtu.be/sU_MpfjnF3E "Filtering in Action")>
-  </a>
+
 Filter in Action:
 
 [![Filter in Action](http://img.youtube.com/vi/sU_MpfjnF3E/0.jpg)](https://youtu.be/sU_MpfjnF3E "Filtering in Action")
