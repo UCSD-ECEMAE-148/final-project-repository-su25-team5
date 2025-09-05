@@ -192,7 +192,7 @@ __Detailed instructions can be found in ...__
 <!-- Early Quarter -->
 ## Robot Design
 
-### CAD Parts
+### Car Parts
 
 #### Custom Designed Parts
 | Part | CAD Model/Laser Cut | Designer |
