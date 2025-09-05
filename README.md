@@ -26,7 +26,6 @@ Team 5 Summer 2025
     <li><a href="#overview">Overview</a></li>
       <ul>
         <li><a href="#youtube-videos">YouTube Videos</a></li>
-      </ul>
         <li><a href="#key-features">Key Features</a></li>
       </ul>
     </li>
