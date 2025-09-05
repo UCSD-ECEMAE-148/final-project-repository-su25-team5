@@ -80,15 +80,15 @@ ROS2 will be used as the link between filters and LiDAR sensing, where filtered 
 
 ### **YouTube Videos:**
 
-Click to watch "Filtering in Action":
+Click to watch "Filtering in Action"
 
 [![Filter in Action](http://img.youtube.com/vi/sU_MpfjnF3E/0.jpg)](https://youtu.be/sU_MpfjnF3E "Filtering in Action")
 
-Click to watch "5 PM Day Model Usage":
+Click to watch "5 PM Day Model Usage"
 
 [![5 PM Day Model Usage](http://img.youtube.com/vi/hHPtVVqu_K4/0.jpg)](https://youtu.be/hHPtVVqu_K4 "5 PM Day Model Usage")
 
-Click to watch "Night Model Usage":
+Click to watch "Night Model Usage"
 
 [![Night Model Usage](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Night Model Usage")
 
@@ -126,11 +126,16 @@ Click to watch "Night Model Usage":
    - An improved GPU cluster allows for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning. 
 ---
 
-### **Node Descriptions**
+### **ROS2 Node Descriptions**
 
-1. 
+1. **The '''donkey_bridge_node'''
+   - Bridges the Donkey Car simulator to ROS2 
 
-2. 
+3. **The '''safety_override_node'''
+   - ...
+
+5. **The ''''smart_avoid_node'''
+   - ...
 
 ---
 
@@ -138,6 +143,8 @@ Click to watch "Night Model Usage":
 - **ROS2:** Framework for data between nodes i.e. the image filter and camera pipeline, as well as the LiDAR for detecting obstacles.
 - **Donkey Car:** Donkey Simulator is implemented into the ROS2 framework in order for deep-learning of the filtered imaging, allowing for autonomous driving.
 - **VESC:** Controls the car's steering and throttle which is necessary for obstacle avoidance.
+- **OAK-D Camera:** The eyes of our robocar, uses images recorded through the camera using Donkey Car, a model is trained for autonomous runs.
+- **LiDAR:** Another pair of eyes of our robocar, the LiDAR allows for obstacle avoidance by measuring distance and the angle where an object is detected
   
 ---
 
