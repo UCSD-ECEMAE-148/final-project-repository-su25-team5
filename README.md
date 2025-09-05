@@ -78,14 +78,20 @@ This project focuses on developing an imaging process filter designated to impro
 In addition, LiDAR sensing will be integrated for obstacle detection and mapping, further improving the perception capabilities of Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
 ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
+### **YouTube Videos:**
+
+Click to watch "Filtering in Action"
+
 [![Filter in Action](http://img.youtube.com/vi/sU_MpfjnF3E/0.jpg)](https://youtu.be/sU_MpfjnF3E "Filtering in Action")
-https://youtu.be/sU_MpfjnF3E
+
+Click to watch "5 PM Day Model Usage"
 
 [![5 PM Day Model Usage](http://img.youtube.com/vi/hHPtVVqu_K4/0.jpg)](https://youtu.be/hHPtVVqu_K4 "5 PM Day Model Usage")
-https://youtu.be/hHPtVVqu_K4
+
+Click to watch "Night Model Usage"
 
 [![Night Model Usage](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Night Model Usage")
-https://youtu.be/2x252IADBzo
+
 
 ### **Key Features**
 - **Image Filtering:** Imaging is captured, enhanced, lifted, blurred, gray scaled, then a canny edge filter is applied.
@@ -120,11 +126,16 @@ https://youtu.be/2x252IADBzo
    - An improved GPU cluster allows for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning. 
 ---
 
-### **Node Descriptions**
+### **ROS2 Node Descriptions**
 
-1. 
+1. **The '''donkey_bridge_node'''
+   - Bridges the Donkey Car simulator to ROS2 
 
-2. 
+3. **The '''safety_override_node'''
+   - ...
+
+5. **The ''''smart_avoid_node'''
+   - ...
 
 ---
 
@@ -132,6 +143,8 @@ https://youtu.be/2x252IADBzo
 - **ROS2:** Framework for data between nodes i.e. the image filter and camera pipeline, as well as the LiDAR for detecting obstacles.
 - **Donkey Car:** Donkey Simulator is implemented into the ROS2 framework in order for deep-learning of the filtered imaging, allowing for autonomous driving.
 - **VESC:** Controls the car's steering and throttle which is necessary for obstacle avoidance.
+- **OAK-D Camera:** The eyes of our robocar, uses images recorded through the camera using Donkey Car, a model is trained for autonomous runs.
+- **LiDAR:** Another pair of eyes of our robocar, the LiDAR allows for obstacle avoidance by measuring distance and the angle where an object is detected
   
 ---
 
@@ -179,29 +192,29 @@ __Detailed instructions can be found in ...__
 <!-- Early Quarter -->
 ## Robot Design
 
-### CAD Parts
+### Car Parts
 
 #### Custom Designed Parts
-| Part | CAD Model | Designer |
+| Part | CAD Model/Laser Cut | Designer |
 |------|--------------|------------|
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
 | LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
-| GPS Mount 
-(Not used in final project but used earlier in the quarter) | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
+| GPS Mount (Used earlier in the quarter) | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
 | VESC Mount | <img src="images/VESC Holder.png" width="235" height="202" /> | Angel
+| OAK-D Lite Case | <img src="images/OAK-D Lite Case.png" width="300" height="250" /> | Omar 
+| RoboCar Support Board | <img src="images/Support Board.png" width="300" height="250" /> | Omar
+
 
 
 #### Open Source Parts
 | Part | CAD Model | Source |
 |------|--------|-----------|
 | Jetson Nano Case | <img src="images/Jetson Nano Cover.png" width="300" height="214" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
-| Oak-D Lite Case | <img src="images/Camera Case.png" width="300" height="250" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
-
 
 ### Electronic Hardware
 Circuit Diagram of the electronics for the car.
 
-<img src="images/ECE 148 Schematics.jpg" width="800" height="400" />
+<img src="images/ECE 148 Schematics.jpg" width="800" height="600" />
 
 *Special thanks to Omar for soldering & fixing the broken components as well as organizing them.*
 
