@@ -3,6 +3,8 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from sensor_msgs.msg import LaserScan
 import math
+from geometry_msgs.msg import Twist
+
 
 
 class FusionNode(Node):
@@ -18,7 +20,8 @@ class FusionNode(Node):
         self.create_subscription(String, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
-        self.pub = self.create_publisher(String, '/cmd_vel2', 10)
+        #self.pub = self.create_publisher(String, '/cmd_vel2', 10)
+        self.pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
     def lidar_callback(self, msg):
         self.lidar_status = msg.data
@@ -31,9 +34,8 @@ class FusionNode(Node):
 
     def make_decision(self):
         if self.lidar_status is None: #or self.camera_status is None:
-            return  # wait until both sensors provide data
-	# decision = "FORWARD"
-        self.car_acc = 0.5
+            return  
+
         self.get_logger().info(f"lidar: {self.lidar_status}")
 
         # Rule 1: Safety first
@@ -57,15 +59,22 @@ class FusionNode(Node):
             else:
                 self.car_steering = -0.5
                 self.car_acc = 0.2
+        elif self.lidar_status == "FORWARD":
+            self.car_steering = 0.0
+            self.car_acc = 0.5
 
         # Publish final
-        msg_out = String()
+        #msg_out = String()
         # msg_out.data = f"STEERING:{self.car_steering},THROTTLE:{self.car_acc}"
-        msg_out.data = f"THROTTLE:{self.car_acc},STEERING:{self.car_steering}"
+        #msg_out.data = f"THROTTLE:{self.car_acc},STEERING:{self.car_steering}"
+        msg_out = Twist()
+        msg_out.linear.x = self.car_acc
+        msg_out.angular.z = self.car_steering
 
         self.pub.publish(msg_out)
-        self.get_logger().info(f"Fusion Decision: {msg_out.data} "
-                               f"(LIDAR={self.lidar_status}, CAMERA={self.camera_status})")
+        self.get_logger().info(f"Published: THROTTLE={self.car_acc}, STEERING={self.car_steering}")
+        # self.get_logger().info(f"Fusion Decision: {msg_out.data} "
+        #                        f"(LIDAR={self.lidar_status}, CAMERA={self.camera_status})")
 
 
 def main(args=None):

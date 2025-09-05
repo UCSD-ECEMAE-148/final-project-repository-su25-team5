@@ -50,15 +50,23 @@ class ObstacleDecision(Node):
             clear_left = self.count_clear(left_sector)
             clear_right = self.count_clear(right_sector)
 
-            self.get_logger().info(f"Obstacle ahead. min: {msg.angle_min}, max:{msg.angle_max} Left: {clear_left}, Right: {clear_right}")
-
-            if clear_left > clear_right:
+            if min(front_sector) < 0.2:
+                msg_out.data = "STOP"
+                self.get_logger().info(f"Obstacle too close! min: {min(front_sector)}")
+                self.lidar_pub.publish(msg_out)
+                msg_out.data = "STOP"
+            elif clear_left > clear_right:
                 msg_out.data = "LEFT"
-            else:
+            elif clear_right > clear_left:
                 msg_out.data = "RIGHT"
+            else:
+                msg_out.data = "STOP"
         else:
             msg_out.data = "FORWARD."
-
+        self.get_logger().info(f"Lidar Decision: {msg_out.data} "
+                               f"(Front min: {min(front_sector) if front_sector else 'N/A'}, "
+                               f"Left clear: {self.count_clear(left_sector)}, "
+                               f"Right clear: {self.count_clear(right_sector)})")
         self.lidar_pub.publish(msg_out)
 
     def count_clear(self, sector):
