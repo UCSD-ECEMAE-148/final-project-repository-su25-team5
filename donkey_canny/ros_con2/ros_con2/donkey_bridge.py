@@ -18,9 +18,11 @@ class DonkeyBridgeNode(Node):
 
     def listener_callback(self, msg):
         try:
-            data = json.loads(msg.data)
-            shared_data["angle"] = data.get("angle", 0.0)
-            shared_data["throttle"] = data.get("throttle", 0.0)
+            parts = msg.data.split(',')
+            throttle = float(parts[0].split(':')[1])
+            steering = float(parts[1].split(':')[1])
+            shared_data["throttle"] = throttle
+            shared_data["angle"] = steering
         except Exception as e:
             self.get_logger().error(f"Parse error: {e}")
 
