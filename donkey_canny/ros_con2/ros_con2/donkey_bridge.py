@@ -17,6 +17,7 @@ class DonkeyBridgeNode(Node):
         )
 
     def listener_callback(self, msg):
+        self.get_logger().info(f"Publishing angle: {msg.data}")
         try:
             parts = msg.data.split(',')
             throttle = float(parts[0].split(':')[1])

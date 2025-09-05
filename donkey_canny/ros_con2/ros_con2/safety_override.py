@@ -34,7 +34,7 @@ class FusionNode(Node):
             return  # wait until both sensors provide data
 	# decision = "FORWARD"
         self.car_acc = 0.5
-        self.get_logger().info(f"lidar: {self.lidar_status}")
+        #self.get_logger().info(f"lidar: {self.lidar_status}")
 
         # Rule 1: Safety first
         if self.lidar_status == "STOP":

@@ -12,5 +12,6 @@ class ROS2BridgePart:
         # Safely grab the latest values written by the ROS2 node 
         with self.lock: 
             angle = self.data_store.get("angle", 0.0) 
-            throttle = self.data_store.get("throttle", 0.0) 
-            return angle, throttle
+            throttle = self.data_store.get("throttle", 0.0)
+        print(f"[ROS2BridgePart] angle: {angle:.3f}, throttle: {throttle:.3f}")
+        return angle, throttle
