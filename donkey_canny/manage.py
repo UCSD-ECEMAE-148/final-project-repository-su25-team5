@@ -253,9 +253,10 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
                 threaded=True)
             
-            #from ros_con2.ros_con2.donkey_bridge import ROS2BridgePart
-            #ros_part = ROS2BridgePart()
-            #V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)
+            from ros_con2.donkey_bridge import ROS2BridgePart
+            ros_part = ROS2BridgePart()
+            V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)
+
 
     #this throttle filter will allow one tap back for esc reverse
     th_filter = ThrottleFilter()
@@ -876,9 +877,11 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
             ctr.print_controls()
 
 
-        #from ros_con2.ros_con2.donkey_bridge import ROS2BridgePart
-       # ros_part = ROS2BridgePart()
-       # V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)  # run in its own thread so ROS spin() doesn’t block
+
+        from ros_con2.donkey_bridge import ROS2BridgePart
+        ros_part = ROS2BridgePart()
+        V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)  # run in its own thread so ROS spin() doesn’t block
+
 
     # run the vehicle
     V.start(rate_hz=cfg.DRIVE_LOOP_HZ, max_loop_count=cfg.MAX_LOOPS)

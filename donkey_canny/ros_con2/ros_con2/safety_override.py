@@ -14,7 +14,7 @@ class FusionNode(Node):
         self.car_acc = 0
 
         # Subscribers
-        self.create_subscription(String, '/camera_status', self.camera_callback, 10)
+       # self.create_subscription(String, '/camera_status', self.camera_callback, 10)
         self.create_subscription(String, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
@@ -25,9 +25,9 @@ class FusionNode(Node):
         #self.get_logger().info(f"lidar: {msg.data}")
         self.make_decision()
 
-    def camera_callback(self, msg):
-        self.camera_status = msg.data
-        self.make_decision()
+    #def camera_callback(self, msg):
+       # self.camera_status = msg.data
+        #self.make_decision()
 
     def make_decision(self):
         if self.lidar_status is None: #or self.camera_status is None:

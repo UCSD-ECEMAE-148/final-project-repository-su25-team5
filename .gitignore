@@ -1,7 +1,6 @@
 # Donkey Car data
 data/
 tubs/
-models/
 
 # Python
 __pycache__/

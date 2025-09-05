@@ -2,63 +2,54 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+from rclpy.executors import SingleThreadedExecutor
 
+class ROS2BridgePart():
+    """
+    ROS2 + DonkeyCar part combined.
+    Subscribes to /cmd_vel2 (String) and exposes
+    update() returning (steering, throttle).
+    """
+    def __init__(self):
+        if not rclpy.ok:
+            rclpy.init()
 
-# -------------------------------
-# ROS2 Node (subscribes to /cmd_vel2)
-# -------------------------------
-class DonkeyBridge(Node):
-    def __init__(self, car=None):
-        super().__init__('donkey_bridge')
-
-        # save handle to DonkeyCar (if passed in from manage.py)
-        self.car = car
+        self.node = Node('donkey_subscriber')
         self.steering = 0.0
         self.throttle = 0.0
 
-        # Subscriber: listen for velocity commands from ROS
-        self.create_subscription(
-            String, '/cmd_vel2', self.cmd_vel_callback, 10
+        self.node.create_subscription(
+            String,
+            '/cmd_vel2',
+            self.callback,
+            10
         )
 
-        self.get_logger().info("DonkeyBridge node started.")
-
-    def cmd_vel_callback(self, msg):
-        # Convert String -> DonkeyCar throttle + steering
-        try:
-            data = msg.data.split(',')
-            self.throttle = float(data[0].split(':')[1])
-            self.steering = float(data[1].split(':')[1])
-            self.get_logger().info(
-                f"Received cmd_vel: throttle={self.throttle}, steering={self.steering}"
-            )
-        except Exception as e:
-            self.get_logger().error(f"Bad /cmd_vel2 format: {msg.data} ({e})")
-
-
-# -------------------------------
-# DonkeyCar Part Wrapper
-# -------------------------------
-class ROS2BridgePart:
-    def __init__(self):
-        rclpy.init(args=None)
-        self.node = DonkeyBridge()
-        from rclpy.executors import SingleThreadedExecutor
-        self.executor = SingleThreadedExecutor()
+        self.executor = rclpy.executors.SingleThreadedExecutor()
         self.executor.add_node(self.node)
 
-    def run(self):
-        # Process ROS2 callbacks
-        self.executor.spin_once(timeout_sec=0.01)
+        # Run the executor in a background thread
+        self.thread = Thread(target=self.executor.spin, daemon=True)
+        self.thread.start()
+        self.get_logger().info(f"{name} node started.")
 
-        # Return latest commands
-        return self.node.steering, self.node.throttle
+    def cmd_vel_callback(self, msg):
+        """Parse String message: 'THROTTLE:<value>,STEERING:<value>'"""
+        try:
+            parts = msg.data.split(',')
+            self.throttle = float(parts[0].split(':')[1])
+            self.steering = float(parts[1].split(':')[1])
+        except Exception as e:
+            self.get_logger().error(f"Failed to parse /cmd_vel2: {msg.data} ({e})")
+
+    def update(self):
+        """Called by DonkeyCar vehicle loop"""
+        return self.steering, self.throttle
 
     def shutdown(self):
+        """Clean shutdown"""
         self.executor.shutdown()
-        self.node.destroy_node()
-        rclpy.shutdown()
-
+        self.destroy_node()
 
 # -------------------------------
 # Standalone ROS2 Entry Point
