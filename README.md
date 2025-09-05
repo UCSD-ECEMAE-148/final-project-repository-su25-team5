@@ -88,11 +88,11 @@ Click to watch "5 PM Day Model Usage"
 
 Click to watch "Night Model Usage"
 
-[![Night Model Usage](http://img.youtube.com/vi/Y8Ywqo7uJKo/0.jpg)](https://youtu.be/Y8Ywqo7uJKo "Night Model Usage")
+[![Night Model Usage](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Night Model Usage")
 
 Click to watch "Obstacle Avoidance"
 
-[![Obstacle Avoidance](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Obstacle Avoidance")
+[![Obstacle Avoidance](http://img.youtube.com/vi/Y8Ywqo7uJKo/0.jpg)](https://youtu.be/Y8Ywqo7uJKo "Obstacle Avoidance")
 
 ### **Key Features**
 - **Image Filtering:** Imaging is captured, enhanced, lifted, blurred, gray scaled, then a canny edge filter is applied.
