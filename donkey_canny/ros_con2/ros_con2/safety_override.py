@@ -12,8 +12,8 @@ class FusionNode(Node):
         super().__init__('fusion_node')
         self.lidar_status = None
         self.camera_status = None
-        self.car_steering = 0
-        self.car_acc = 0
+        self.car_steering = 0.0
+        self.car_acc = 0.0
 
         # Subscribers
         self.create_subscription(String, '/camera_status', self.camera_callback, 10)
@@ -68,8 +68,8 @@ class FusionNode(Node):
         # msg_out.data = f"STEERING:{self.car_steering},THROTTLE:{self.car_acc}"
         #msg_out.data = f"THROTTLE:{self.car_acc},STEERING:{self.car_steering}"
         msg_out = Twist()
-        msg_out.linear.x = self.car_acc
-        msg_out.angular.z = self.car_steering
+        msg_out.linear.x = float(self.car_acc)
+        msg_out.angular.z = float(self.car_steering)
 
         self.pub.publish(msg_out)
         self.get_logger().info(f"Published: THROTTLE={self.car_acc}, STEERING={self.car_steering}")
