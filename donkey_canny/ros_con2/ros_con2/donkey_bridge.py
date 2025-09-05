@@ -1,69 +1,35 @@
-#!/usr/bin/env python3
+# donkey_bridge_node.py
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from rclpy.executors import SingleThreadedExecutor
+import json
 
-class ROS2BridgePart():
-    """
-    ROS2 + DonkeyCar part combined.
-    Subscribes to /cmd_vel2 (String) and exposes
-    update() returning (steering, throttle).
-    """
+shared_data = {"angle": 0.0, "throttle": 0.0}
+
+class DonkeyBridgeNode(Node):
     def __init__(self):
-        if not rclpy.ok:
-            rclpy.init()
-
-        self.node = Node('donkey_subscriber')
-        self.steering = 0.0
-        self.throttle = 0.0
-
-        self.node.create_subscription(
+        super().__init__('donkey_bridge_node')
+        self.sub = self.create_subscription(
             String,
             '/cmd_vel2',
-            self.callback,
+            self.listener_callback,
             10
         )
 
-        self.executor = rclpy.executors.SingleThreadedExecutor()
-        self.executor.add_node(self.node)
-
-        # Run the executor in a background thread
-        self.thread = Thread(target=self.executor.spin, daemon=True)
-        self.thread.start()
-        self.get_logger().info(f"{name} node started.")
-
-    def cmd_vel_callback(self, msg):
-        """Parse String message: 'THROTTLE:<value>,STEERING:<value>'"""
+    def listener_callback(self, msg):
         try:
-            parts = msg.data.split(',')
-            self.throttle = float(parts[0].split(':')[1])
-            self.steering = float(parts[1].split(':')[1])
+            data = json.loads(msg.data)
+            shared_data["angle"] = data.get("angle", 0.0)
+            shared_data["throttle"] = data.get("throttle", 0.0)
         except Exception as e:
-            self.get_logger().error(f"Failed to parse /cmd_vel2: {msg.data} ({e})")
+            self.get_logger().error(f"Parse error: {e}")
 
-    def update(self):
-        """Called by DonkeyCar vehicle loop"""
-        return self.steering, self.throttle
-
-    def shutdown(self):
-        """Clean shutdown"""
-        self.executor.shutdown()
-        self.destroy_node()
-
-# -------------------------------
-# Standalone ROS2 Entry Point
-# -------------------------------
 def main(args=None):
     rclpy.init(args=args)
-    node = DonkeyBridge()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
+    node = DonkeyBridgeNode()
+    rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
