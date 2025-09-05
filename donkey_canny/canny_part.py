@@ -9,112 +9,150 @@ class CannyPart:
     def run(self, img_arr):
         
 
-        ## Day/Night Changes -----------------------------------------
+        ## Check if Pixels are Uniform (No Shadow) ------------
 
-        lab = cv2.cvtColor(img_arr, cv2.COLOR_BGR2LAB)
+        gray = cv2.cvtColor(img_arr, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+
+
+        lab = cv2.cvtColor(gray, cv2.COLOR_BGR2LAB)
         L, A, B = cv2.split(lab)
 
-        mean_L = np.mean(L)
-        dark_ratio = np.sum(L < 60) / L.size
 
+        std_L = np.std(L)
+        lap_var = cv2.Laplacian(L, cv2.CV_64F).var()
 
-        if (mean_L < 120):
-            lower_y = 0
+        if (std_L > 50):
+            apply_shadow_correction = True
         else:
-            lower_y = 33
+            apply_shadow_correction = False
 
         ## -----------------------------------------
 
-
-        ## Enhance Yellow and White Lines ----------------------------------------------------
-
-        hsv = cv2.cvtColor(img_arr, cv2.COLOR_BGR2HSV)
-
-        # yellow mask
-        lower_yellow = np.array([0, lower_y, 60])
-        upper_yellow = np.array([50, 255, 255])
-        mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
-
-        # white mask
-        lower_white = np.array([91, 0, 190])
-        upper_white = np.array([152, 255, 255])
-        mask_white = cv2.inRange(hsv, lower_white, upper_white)
-
-        # combine masks
-        mask_colors = cv2.bitwise_or(mask_yellow, mask_white)
-
-        # enhance brightness in those areas
-        h, s, v = cv2.split(hsv)
-        v_boost = v.copy()
-        v_boost[mask_colors > 0] = np.clip(v_boost[mask_colors > 0] * 1.9, 0, 255).astype(np.uint8)
-
-        hsv_boost = cv2.merge([h, s, v_boost])
-        img_boost = cv2.cvtColor(hsv_boost, cv2.COLOR_HSV2BGR)
+        if(apply_shadow_correction):
 
 
-        ##  ----------------------------------------------------------------
+            ## Day/Night Changes -----------------------------------------
 
-        ## Brightening the Shadows ----------------------------------------------------
+            lab = cv2.cvtColor(img_arr, cv2.COLOR_BGR2LAB)
+            L, A, B = cv2.split(lab)
 
-        shadow_percentile=52
-        mask_smooth=1
-        gamma=0.16
-        alphaMul = .9
-
-        # find dark regions via luminance 
-        lab = cv2.cvtColor(img_boost, cv2.COLOR_BGR2LAB)
-        L, A, B = cv2.split(lab)
-
-        mean_L = np.mean(L)
-
-        if mean_L < 150:       # image very dark
-            shadow_percentile = 52
-        elif mean_L > 170:    # image very bright
-            shadow_percentile = 30
-
-        thr = np.percentile(L, shadow_percentile)
-        mask = (L < thr).astype(np.uint8) * 255  # 0/255 mask
-
-        if mask_smooth > 0:
-            k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (mask_smooth, mask_smooth)) # use ellipse
-            mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, k)
-            mask = cv2.GaussianBlur(mask, (0, 0), 3)
-
-        dark_ratio = np.sum(L < 60) / L.size
-
-        if dark_ratio*10 > 0.55:       # lots of dark pixels
-            gamma = 0.09
-        elif dark_ratio*10 > 0.3:     
-            gamma = 0.55
-        else:                       # image is bright
-            gamma = 0.85
-
-        # brighten only dark pixels 
-        Lf = L.astype(np.float32) / 255.0
-        L_gamma = np.power(Lf, gamma) * 255.0      # gamma<1 = lift shadows
-        L_gamma = np.clip(L_gamma, 0, 255).astype(np.uint8)
-
-        alpha = (mask.astype(np.float32) / 255.0) * alphaMul 
-        L_lift = ((1 - alpha) * L.astype(np.float32) + alpha * L_gamma.astype(np.float32)).astype(np.uint8)
-
-        lab_lift = cv2.merge([L_lift, A, B])
-        img_lift = cv2.cvtColor(lab_lift, cv2.COLOR_LAB2BGR)
-
-        ##  ----------------------------------------------------------------
+            mean_L = np.mean(L)
+            dark_ratio = np.sum(L < 60) / L.size
 
 
-        ## Bluring Image ----------------------------------------------------
+            if (mean_L < 95):
+                lower_y = 0
 
-        avg = cv2.blur(img_lift, (2, 2))   # k x k kernel
+            else:
+                lower_y = 46 #33
 
-        ##  ----------------------------------------------------------------
+
+            ## -----------------------------------------
+
+
+            ## Enhance Yellow and White Lines ----------------------------------------------------
+
+            hsv = cv2.cvtColor(img_arr, cv2.COLOR_BGR2HSV)
+
+            # yellow mask
+            lower_yellow = np.array([0, lower_y, 45]) 
+            upper_yellow = np.array([50, 255, 255])
+            mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+
+            # white mask
+            lower_white = np.array([100, 30, 190]) #91,0,190
+            upper_white = np.array([152, 255, 255])
+            mask_white = cv2.inRange(hsv, lower_white, upper_white)
+
+            # combine masks
+            mask_colors = cv2.bitwise_or(mask_yellow, mask_white)
+
+            # enhance brightness in those areas
+            h, s, v = cv2.split(hsv)
+            v_boost = v.copy()
+            v_boost[mask_colors > 0] = np.clip(v_boost[mask_colors > 0] * 1.9, 0, 255).astype(np.uint8)
+
+            hsv_boost = cv2.merge([h, s, v_boost])
+            img_boost = cv2.cvtColor(hsv_boost, cv2.COLOR_HSV2BGR)
+
+
+            ##  ----------------------------------------------------------------
+
+            ## Brightening the Shadows ----------------------------------------------------
+
+            shadow_percentile=52
+            mask_smooth=1
+            gamma=0.16
+            alphaMul = .9
+
+            # find dark regions via luminance 
+            lab = cv2.cvtColor(img_boost, cv2.COLOR_BGR2LAB)
+            L, A, B = cv2.split(lab)
+
+            mean_L = np.mean(L)
+
+
+            if mean_L < 145:       # image very dark
+
+                shadow_percentile = 52 #52
+
+            else:    # image very bright
+                shadow_percentile = 30
+
+            thr = np.percentile(L, shadow_percentile)
+            mask = (L < thr).astype(np.uint8) * 255  # 0/255 mask
+
+            if mask_smooth > 0:
+                k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (mask_smooth, mask_smooth)) # use ellipse
+                mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, k)
+                mask = cv2.GaussianBlur(mask, (0, 0), 3)
+
+            dark_ratio = np.sum(L < 60) / L.size
+
+            if dark_ratio*10 > 0.55:       # lots of dark pixels
+                gamma = 0.18
+
+            elif dark_ratio*10 > 0.44:     
+                gamma = 0.35
+
+            else:                       # image is bright
+                gamma = 0.85
+
+
+            # brighten only dark pixels 
+            Lf = L.astype(np.float32) / 255.0
+            L_gamma = np.power(Lf, gamma) * 255.0      # gamma<1 = lift shadows
+            L_gamma = np.clip(L_gamma, 0, 255).astype(np.uint8)
+
+            alpha = (mask.astype(np.float32) / 255.0) * alphaMul 
+            L_lift = ((1 - alpha) * L.astype(np.float32) + alpha * L_gamma.astype(np.float32)).astype(np.uint8)
+
+            lab_lift = cv2.merge([L_lift, A, B])
+            img_lift = cv2.cvtColor(lab_lift, cv2.COLOR_LAB2BGR)
+
+            ##  ----------------------------------------------------------------
+
+
+            ## Bluring Image / Canny Sensitivity -------------------------------
+
+            avg = cv2.blur(img_lift, (3, 3))   # k x k kernel
+
+            a = 700
+            b = 1300
+
+            ##  ----------------------------------------------------------------
+            
+        else:
+            avg = cv2.blur(img_arr, (3, 3))   # k x k kernel
+            a = 700
+            b = 850
 
 
         ## Canny Edge ----------------------------------------------------
 
         gray = cv2.cvtColor(avg, cv2.COLOR_BGR2GRAY)
-        edges = cv2.Canny(gray, 800, 1400, apertureSize=5, L2gradient=True)
-
+        edges = cv2.Canny(gray, a, b, apertureSize=5, L2gradient=True)
 
         ##  ----------------------------------------------------------------
 

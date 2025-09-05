@@ -19,10 +19,10 @@ import os
 DRIVE_LOOP_HZ = 20      # the vehicle loop will pause if faster than this speed.
 MAX_LOOPS = None        # the vehicle loop can abort after this many iterations, when given a positive integer.
 # 
-# #CAMERA
+# #CAMERA	
 CAMERA_TYPE = "OAKD"   # (PICAM|WEBCAM|CVCAM|CSIC|V4L|D435|MOCK|IMAGE_LIST)
-IMAGE_W = 160
-IMAGE_H = 120
+IMAGE_W = 320
+IMAGE_H = 240
 IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 CAMERA_FRAMERATE = DRIVE_LOOP_HZ
 CAMERA_VFLIP = False
@@ -476,7 +476,7 @@ MIN_DELTA = .0005               #early stop will want this much loss change befo
 # #
 # AUGMENTATIONS = []         # changes to image only applied in training to create
 #                            # more variety in the data.
-# TRANSFORMATIONS = []       # changes applied _before_ training augmentations,
+#TRANSFORMATIONS = []       # changes applied _before_ training augmentations,
 #                            # such that augmentations are applied to the transformed image,
 # POST_TRANSFORMATIONS = []  # transformations applied _after_ training augmentations,
 #                            # such that changes are applied to the augmented image
@@ -534,8 +534,8 @@ MIN_DELTA = .0005               #early stop will want this much loss change befo
 # BLUR_GAUSSIAN = True   # blur is gaussian if True, simple if False
 # 
 # # "RESIZE" transformation
-# RESIZE_WIDTH = 160     # horizontal size in pixels
-# RESIZE_HEIGHT = 120    # vertical size in pixels
+#RESIZE_WIDTH = 640     # horizontal size in pixels
+#RESIZE_HEIGHT = 240    # vertical size in pixels
 # 
 # # "SCALE" transformation
 # SCALE_WIDTH = 1.0      # horizontal scale factor

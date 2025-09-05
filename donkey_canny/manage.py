@@ -253,7 +253,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 outputs=['user/angle', 'user/throttle', 'user/mode', 'recording'],
                 threaded=True)
             
-            from ros_con2.ros_con.donkey_bridge import ROS2BridgePart
+            from ros_con2.ros_con2.donkey_bridge import ROS2BridgePart
             ros_part = ROS2BridgePart()
             V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)
 
@@ -876,7 +876,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
             ctr.print_controls()
 
 
-        from ros_con2.ros_con.donkey_bridge import ROS2BridgePart
+        from ros_con2.ros_con2.donkey_bridge import ROS2BridgePart
         ros_part = ROS2BridgePart()
         V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=True)  # run in its own thread so ROS spin() doesn’t block
 
