@@ -195,20 +195,21 @@ __Detailed instructions can be found in ...__
 ### CAD Parts
 
 #### Custom Designed Parts
-| Part | CAD Model | Designer |
+| Part | CAD Model/Laser Cut | Designer |
 |------|--------------|------------|
 | Camera Mount | <img src="images/Camera Mount.png" width="300" height="477" /> | Zhenyu
 | LiDAR Mount | <img src="images/LiDAR Mount.png" width="300" height="477" /> | Angel
 | GPS Mount (Used earlier in the quarter) | <img src="images/GPS Stand.png" width="300" height="530" /> | Angel
 | VESC Mount | <img src="images/VESC Holder.png" width="235" height="202" /> | Angel
+| OAK-D Lite Case | <img src="images/OAK-D Lite Case.png" width="300" height="250" /> | Omar 
+| RoboCar Support Board | <img src="images/Support Board.png" width="300" height="250" /> | Omar
+
 
 
 #### Open Source Parts
 | Part | CAD Model | Source |
 |------|--------|-----------|
 | Jetson Nano Case | <img src="images/Jetson Nano Cover.png" width="300" height="214" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
-| Oak-D Lite Case | <img src="images/Camera Case.png" width="300" height="250" /> | [Thingiverse](https://www.thingiverse.com/thing:3518410) |
-
 
 ### Electronic Hardware
 Circuit Diagram of the electronics for the car.
