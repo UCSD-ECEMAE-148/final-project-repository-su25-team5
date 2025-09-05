@@ -25,6 +25,8 @@ Team 5 Summer 2025
   <ol>
     <li><a href="#overview">Overview</a></li>
       <ul>
+        <li><a href="#youtube-videos">YouTube Videos</a></li>
+      </ul>
         <li><a href="#key-features">Key Features</a></li>
       </ul>
     </li>
@@ -35,9 +37,7 @@ Team 5 Summer 2025
         <li><a href="#nice-to-have-features">Nice-to-Have Features</a></li>
       </ul>
     </li>
-    <li><a href="#system-architecture">System Architecture</a>
-      <ul>
-        <li><a href="#node-descriptions">Node Descriptions</a></li>
+        <li><a href="#ros2-node-descriptions">ROS2 Node Descriptions</a>
       </ul>
     </li>
     <li><a href="#technologies-used">Technologies Used</a></li>
@@ -51,7 +51,7 @@ Team 5 Summer 2025
     <li><a href="#final-project-documentation">Final Project Documentation</a></li>
     <li><a href="#robot-design">Robot Design</a>
       <ul>
-        <li><a href="#cad-parts">CAD Parts</a>
+        <li><a href="#cad-parts">Car Parts</a>
           <ul>
             <li><a href="#custom-designed-parts">Custom Designed Parts</a></li>
             <li><a href="#open-source-parts">Open Source Parts</a></li>
@@ -62,7 +62,6 @@ Team 5 Summer 2025
           <ul>
             <li><a href="#embedded-systems">Embedded Systems</a></li>
             <li><a href="#ros2">ROS2</a></li>
-            <li><a href="#donkeycar-ai">DonkeyCar AI</a></li>
           </ul>
         </li>
       </ul>
