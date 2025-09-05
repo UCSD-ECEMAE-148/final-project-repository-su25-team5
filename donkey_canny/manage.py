@@ -18,7 +18,7 @@ import os
 import time
 import logging
 from docopt import docopt
-
+import rclpy
 
 import donkeycar as dk
 from donkeycar.parts import actuator
@@ -49,6 +49,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
     and inputs. The framework handles passing named outputs to parts
     requesting the same named input.
     """
+    rclpy.init()
     logger.info(f'PID: {os.getpid()}')
     if cfg.DONKEY_GYM:
         #the simulator will use cuda and then we usually run out of resources
@@ -252,7 +253,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
             from ros_con2.donkey_bridge import shared_data
 
             # later in drive():
-            ros_part = ROS2BridgePart(shared_data)
+            ros_part = ROS2BridgePart()
             V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
             V.add(
                 ctr, 
@@ -886,7 +887,7 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
         from ros_con2.donkey_bridge import shared_data
 
         # later in drive():
-        ros_part = ROS2BridgePart(shared_data)
+        ros_part = ROS2BridgePart()
         V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
 
 
