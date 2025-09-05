@@ -78,13 +78,17 @@ This project focuses on developing an imaging process filter designated to impro
 In addition, LiDAR sensing will be integrated for obstacle detection and mapping, further improving the perception capabilities of Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
 ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
+**YouTube Videos:**
 Filter in Action
+
 [![Filter in Action](http://img.youtube.com/vi/sU_MpfjnF3E/0.jpg)](https://youtu.be/sU_MpfjnF3E "Filtering in Action")
 
 5 PM Day Model Usage
+
 [![5 PM Day Model Usage](http://img.youtube.com/vi/hHPtVVqu_K4/0.jpg)](https://youtu.be/hHPtVVqu_K4 "5 PM Day Model Usage")
 
 Night Model Usage
+
 [![Night Model Usage](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Night Model Usage")
 
 
