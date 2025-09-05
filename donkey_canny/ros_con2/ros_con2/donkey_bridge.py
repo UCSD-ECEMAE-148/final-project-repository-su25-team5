@@ -1,38 +1,45 @@
-# donkey_bridge_node.py
+# donkey_bridge_part.py
+import threading
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-import json
+import re
 
-shared_data = {"angle": 0.0, "throttle": 0.0}
-
-class DonkeyBridgeNode(Node):
+class ROS2BridgePart(Node):
     def __init__(self):
-        super().__init__('donkey_bridge_node')
-        self.sub = self.create_subscription(
+        super().__init__('ros2_bridge_part')
+
+        # Latest command values
+        self.angle = 0.0
+        self.throttle = 0.0
+        self.lock = threading.Lock()
+
+        # Subscriber to the string topic
+        self.sub_cmd = self.create_subscription(
             String,
-            '/cmd_vel2',
-            self.listener_callback,
+            '/cmd_val2',   # your topic name
+            self.cmd_callback,
             10
         )
 
-    def listener_callback(self, msg):
-        self.get_logger().info(f"Publishing angle: {msg.data}")
+        self.get_logger().info("ROS2BridgePart initialized and subscribed to /cmd_val2.")
+
+    def cmd_callback(self, msg):
+        """Parse string like 'THROTTLE:0.2,STEERING:0.5'"""
         try:
-            parts = msg.data.split(',')
-            throttle = float(parts[0].split(':')[1])
-            steering = float(parts[1].split(':')[1])
-            shared_data["throttle"] = throttle
-            shared_data["angle"] = steering
+            # Extract numbers using regex
+            match = re.search(r'THROTTLE:([-\d\.]+),STEERING:([-\d\.]+)', msg.data)
+            if match:
+                throttle_val = float(match.group(1))
+                angle_val = float(match.group(2))
+                with self.lock:
+                    self.throttle = throttle_val
+                    self.angle = angle_val
+                self.get_logger().debug(f"Received -> angle: {angle_val:.3f}, throttle: {throttle_val:.3f}")
         except Exception as e:
-            self.get_logger().error(f"Parse error: {e}")
+            self.get_logger().error(f"Failed to parse cmd_val2: {e}")
 
-def main(args=None):
-    rclpy.init(args=args)
-    node = DonkeyBridgeNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
+    def run(self):
+        # Return latest command safely
+        with self.lock:
+            return self.angle, self.throttle
