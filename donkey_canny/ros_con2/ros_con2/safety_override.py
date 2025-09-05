@@ -18,7 +18,7 @@ class FusionNode(Node):
         self.create_subscription(String, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
-        self.pub = self.create_publisher(String, '/cmd_vel2', 10)
+        self.pub = self.create_publisher(String, '/cmd_vel', 10)
 
     def lidar_callback(self, msg):
         self.lidar_status = msg.data
