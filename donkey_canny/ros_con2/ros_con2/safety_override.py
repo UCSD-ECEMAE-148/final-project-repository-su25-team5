@@ -13,7 +13,7 @@ class FusionNode(Node):
         self.lidar_status = None
         self.camera_status = None
         self.car_steering = 0.0
-        self.car_acc = 0.8
+        self.car_acc = 0.5
 
         # Subscribers
         self.create_subscription(String, '/camera_status', self.camera_callback, 10)
@@ -53,15 +53,15 @@ class FusionNode(Node):
         elif self.lidar_status in ["LEFT", "RIGHT"]:
             # if the car see stuff on the left
             if self.lidar_status == "LEFT":
-                self.car_steering = 0.5
-                self.car_acc = 0.5
+                self.car_steering = 0.7
+                self.car_acc = 0.3
             # if the car see stuff on the right
             else:
-                self.car_steering = -0.5
-                self.car_acc = 0.5
-        elif self.lidar_status == "FORWARD":
+                self.car_steering = -0.7
+                self.car_acc = 0.3
+        else:
             self.car_steering = 0.0
-            self.car_acc = 0.8
+            self.car_acc = 0.5
 
         # Publish final
         #msg_out = String()
