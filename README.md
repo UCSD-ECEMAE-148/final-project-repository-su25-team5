@@ -121,10 +121,10 @@ Click to watch "Obstacle Avoidance"
    - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to stop or turn away from obstacles.
 
 ### **Nice-to-Have Features**
-- **Faster Obstacle Avoidance:**
-   - Have the robot car react faster to obstacles and in turn be able to react to moving obstacles.
-- **Improved GPU Cluster:**
-   - An improved GPU cluster allows for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning. 
+- **Faster/Cleaner Obstacle Avoidance:**
+   - Have the robot car react faster and more efficiently to obstacles and in turn be able to react to moving obstacles.
+- **Better Developer Kit:**
+   - An improved kit with a more efficient G ram limit would allow for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning. 
 ---
 
 ### **ROS2 Node Descriptions**
