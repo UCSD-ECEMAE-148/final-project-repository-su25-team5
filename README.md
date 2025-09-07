@@ -157,7 +157,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
     - Provides a workaround for the rclpy.init() conflict by allowing ROS2 commands to directly control the car without running inside manage.py.
 
 2. **The '''safety_override_node'''**
-    - Fuses inputs from LiDAR (/lidar_status) and camera (/camera_status) to make safety-critical driving decisions.
+    - Fuses inputs from LiDAR (/lidar_status) to make safety-critical driving decisions.
   
     - Implements rules such as stopping for obstacles, avoiding objects detected on the left or right, and slowing down when necessary.
     
