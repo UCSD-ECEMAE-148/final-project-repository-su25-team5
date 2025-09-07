@@ -138,7 +138,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
 
 ### **Donkey Car Custom part Descriptions**
 
- 1. **The '''canny_filter'''** part
+ 1. The '''canny_filter''' part
     - Applies a series of image processing steps to the input images: capture, enhancement, lifting, blurring, grayscale conversion, and Canny edge detection.
 
     - The number of filters applied can be turned on or off based on the average brightness of the input images.
