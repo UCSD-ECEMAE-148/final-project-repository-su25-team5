@@ -79,7 +79,7 @@ This project focuses on developing an imaging process filter designated to impro
 In addition, LiDAR sensing will be integrated for obstacle detection, further improving the perception capabilities of the Donkey Car. Emergency avoidance will be provided to handle suddenly appearing objects, ensuring the safety of people, the driver, and the car itself.
 ROS2 will be used as the link between donkey car and LiDAR sensing, where LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
-<img src="https://github.com/UCSD-ECEMAE-148/winter-2024-final-project-team-4/blob/main/images/UCSDLogo_JSOE_BlueGold.png">
+![Alt Text](images/ECE148_final.jpg)
 
 ### **YouTube Videos:**
 
