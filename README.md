@@ -143,13 +143,13 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
 
     - The number of filters applied can be turned on or off based on the average brightness of the input images.
 
- 2. **'''The donkey_bridge part'''** (successfully subscribes to ROS2 topics but cannot feed data to the Donkey Car)
+ 2. The '''donkey_bridge''' part (successfully subscribes to ROS2 topics but cannot feed data to the Donkey Car)
     - Subscribes to the /cmd_vel2 topic in ROS2.
     - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
     
 ### **ROS2 Node Descriptions**
 
-1. **The ''''smart_avoid_node'''** 
+1. The '''smart_avoid_node'''
    - Subscribes to LiDAR scan data (/scan) and divides the laser readings into front, left, and right sectors.
 
    - Determines if there is an obstacle ahead and decides the safest direction to move (LEFT, RIGHT, or FORWARD) based on the amount of free space in each sector.
@@ -158,7 +158,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
 
    - Based on code from 148-spring-2025-final-project-team-15, with minor modifications.
   
-2. **The '''safety_override_node'''**
+2. The '''safety_override_node'''
     - Fuses inputs from LiDAR (/lidar_status) to make safety-critical driving decisions.
   
     - Implements rules such as stopping for obstacles, avoiding objects detected on the left or right, and slowing down when necessary.
@@ -167,7 +167,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
   
     - Publishes safe driving commands as String messages on /cmd_vel2, ensuring obstacle avoidance and safety overrides take priority over normal control commands. It is intended to serve the Donkey Car, but this functionality is still under development.
 
-3. **The '''donkey_bridge_node'''** (initial test to link ROS2 and Donkey Car, but this approach does not work as intended)
+3. The '''donkey_bridge_node''' (initial test to link ROS2 and Donkey Car, but this approach does not work as intended)
     - Subscribes to the /cmd_vel2 topic in ROS2.
   
     - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
@@ -201,7 +201,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
    git clone https://github.com/UCSD-ECEMAE-148/final-project-repository-su25-team5.git
    cd ..
    ```
-3. install donkey car in ROS2 workspace:
+3. install Donkey Car in ROS2 workspace:
    ```bash
    source_ros2
    git clone https://github.com/autorope/donkeycar 
@@ -211,7 +211,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
    pip install -e .[nano]
    source_ros2
    ```
-4. Launch the donkey car:
+4. Launch Donkey Car:
    ```bash
    cd UCSD-ECEMAE-148/final-project-repository-su25-team5/donkey_canny/
    python3 manage.py drive
@@ -221,7 +221,7 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
    source_ros2
    colcon build --packages-select ros_con2
    ```
-6. Launch the ros system:
+6. Launch the ROS2 system:
    ```bash
    ros2 launch ros_con2 safety_override_system.launch.py
    ```
