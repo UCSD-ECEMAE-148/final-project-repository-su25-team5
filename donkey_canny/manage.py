@@ -192,6 +192,8 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 outputs += ['lidar/dist_array']
             
         V.add(cam, inputs=inputs, outputs=outputs, threaded=threaded)
+
+        # add the filter part right after the camera part, so the filter will be applied to both recording and ai
         V.add(CannyPart(low_threshold=100, high_threshold=200),inputs=['cam/image_array'],outputs=['cam/image_array'])
 
     # add lidar
@@ -248,13 +250,15 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                     netwkJs = JoyStickSub(cfg.NETWORK_JS_SERVER_IP)
                     V.add(netwkJs, threaded=True)
                     ctr.js = netwkJs
-                    
-            from donkey_bridge_part import ROS2BridgePart
-            from ros_con2.donkey_bridge import shared_data
+            
+            # Safety part to prevent unsafe commands, but somehow nothing is changed
+            # from donkey_bridge_part import ROS2BridgePart
+            # from ros_con2.donkey_bridge import shared_data
 
-            # later in drive():
-            ros_part = ROS2BridgePart()
-            V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
+            # # later in drive():
+            # ros_part = ROS2BridgePart()
+            # V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
+
             V.add(
                 ctr, 
                 inputs=['cam/image_array', 'user/mode', 'recording'], 
@@ -535,7 +539,8 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
                 return pilot_angle if pilot_angle else 0.0, \
                        pilot_throttle * cfg.AI_THROTTLE_MULT \
                            if pilot_throttle else 0.0
-            
+    
+    # Safety part to prevent unsafe commands, but somehow nothing is changed 
     # V.add(safety,
     #   inputs=['pilot/angle', 'pilot/throttle', 'sensor_inputs'],
     #   outputs=['pilot/angle', 'pilot/throttle'])
@@ -882,13 +887,13 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None,
             ctr.print_controls()
 
 
+        #Safety part to prevent unsafe commands, but somehow nothing is changed 
+        # from donkey_bridge_part import ROS2BridgePart
+        # from ros_con2.donkey_bridge import shared_data
 
-        from donkey_bridge_part import ROS2BridgePart
-        from ros_con2.donkey_bridge import shared_data
-
-        # later in drive():
-        ros_part = ROS2BridgePart()
-        V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
+        # # later in drive():
+        # ros_part = ROS2BridgePart()
+        # V.add(ros_part, outputs=['user/angle', 'user/throttle'], threaded=False)
 
 
     # run the vehicle

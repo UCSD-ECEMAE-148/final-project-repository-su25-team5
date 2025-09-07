@@ -1,3 +1,4 @@
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -20,6 +21,9 @@ class FusionNode(Node):
         self.create_subscription(String, '/lidar_status', self.lidar_callback, 10)
 
         # Publisher
+        # orginally publish to /cmd_vel2 for donkey_bridge.py to pick up, but somehow the custom part in donkey car does not work
+        # so change to /cmd_vel to ensure the obstical avoidance works
+
         #self.pub = self.create_publisher(String, '/cmd_vel2', 10)
         self.pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
@@ -45,6 +49,7 @@ class FusionNode(Node):
             self.car_steering = 0.0
 
         # Rule 2: Pedestrian always STOP
+        # BUG - camera can't run donkey car and ros at the same time, so disable this rule for now
         #elif "PEDESTRIAN" in self.camera_status.upper():
            # car_acc = 0.0
            # car_steering = 0.0
@@ -63,10 +68,11 @@ class FusionNode(Node):
             self.car_steering = 0.0
             self.car_acc = 0.5
 
-        # Publish final
+        # originally publish a string message to donkey_bridge.py
         #msg_out = String()
         # msg_out.data = f"STEERING:{self.car_steering},THROTTLE:{self.car_acc}"
         #msg_out.data = f"THROTTLE:{self.car_acc},STEERING:{self.car_steering}"
+        
         msg_out = Twist()
         msg_out.linear.x = float(self.car_acc)
         msg_out.angular.z = float(self.car_steering)

@@ -1,4 +1,6 @@
-# donkey_bridge_part.py
+# the custom donkey part that bridges to ROS2
+# BUG - does not work with manage.py yet, the overwrite to donkey car is not happening
+
 import threading
 import rclpy
 from std_msgs.msg import String
@@ -6,7 +8,7 @@ import re
 
 class ROS2BridgePart:
     def __init__(self):
-        self.node = None        # Will hold the Node later
+        self.node = None   
         self.angle = 0.0
         self.throttle = 0.0
         self.lock = threading.Lock()
@@ -20,6 +22,7 @@ class ROS2BridgePart:
                 def __init__(inner_self):
                     super().__init__('ros2_bridge_part')
 
+                    # Subscribe to the cmd_val2 topic 
                     inner_self.sub_cmd = inner_self.create_subscription(
                         String,
                         '/cmd_val2',
@@ -48,6 +51,6 @@ class ROS2BridgePart:
                 self.node.get_logger().error(f"Failed to parse cmd_val2: {e}")
 
     def run(self):
-        """Return latest command safely"""
+        """this will overwrite the value in manage.py at the donkey car"""
         with self.lock:
             return self.angle, self.throttle

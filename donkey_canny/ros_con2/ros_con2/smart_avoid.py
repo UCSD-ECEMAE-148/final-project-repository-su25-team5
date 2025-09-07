@@ -1,4 +1,4 @@
-#TODO 148-spring-2025-final-project-team-15
+# code from 148-spring-2025-final-project-team-15, minor change to fit our need
 
 import rclpy
 from rclpy.node import Node

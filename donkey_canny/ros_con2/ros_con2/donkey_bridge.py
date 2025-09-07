@@ -1,4 +1,7 @@
-# donkey_bridge_node.py
+# the node that orginally subscribes to /cmd_vel2 and updates shared data in the manage.py from donkey car
+# BUG - it can't run in ros and manage.py at the same time, because both of them will call rclpy.init()
+# solution - creating a custom part in donkey car that subscribes to /cmd_vel2 and updates the angle and throttle directly
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
