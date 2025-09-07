@@ -13,7 +13,10 @@
 Team 5 Summer 2025
 </p>
 
-<img src="images/Team 5 RoboCar.jpg" alt="Logo" width="400" height="400">
+
+<img src="images/Team 5 RoboCar.jpg" alt="Logo" width="400" height="400">  
+
+*Special thanks to Angel for the documentation.*
 </div>
 
 
@@ -73,8 +76,10 @@ Team 5 Summer 2025
 ## Overview
 
 This project focuses on developing an imaging process filter designated to improve the reliability of Donkey Car training across different environments. An image filter pipeline will be made to the OAK-D camera feed to normalize lighting conditions so that training and inference remain robust at any time of day.
-In addition, LiDAR sensing will be integrated for obstacle detection and mapping, further improving the perception capabilities of Donkey Car. LiDAR data will complement the filtered camera input by providing reliable depth and spatial awareness.
-ROS2 will be used as the link between filters and LiDAR sensing, where filtered camera images and LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
+In addition, LiDAR sensing will be integrated for obstacle detection, further improving the perception capabilities of the Donkey Car. Emergency avoidance will be provided to handle suddenly appearing objects, ensuring the safety of people, the driver, and the car itself.
+ROS2 will be used as the link between donkey car and LiDAR sensing, where LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
+
+<img src="https://github.com/UCSD-ECEMAE-148/winter-2024-final-project-team-4/blob/main/images/UCSDLogo_JSOE_BlueGold.png">
 
 ### **YouTube Videos:**
 
@@ -93,6 +98,8 @@ Click to watch "Night Model Usage"
 Click to watch "Obstacle Avoidance"
 
 [![Obstacle Avoidance](http://img.youtube.com/vi/Y8Ywqo7uJKo/0.jpg)](https://youtu.be/Y8Ywqo7uJKo "Obstacle Avoidance")
+
+Note that the setup of parts (such as camera position, compute power, and Donkey Car configuration) can vary from car to car, and tuning may be required to achieve the same effect.
 
 ### **Key Features**
 - **Image Filtering:** Imaging is captured, enhanced, lifted, blurred, gray scaled, then a canny edge filter is applied.
@@ -115,29 +122,57 @@ Click to watch "Obstacle Avoidance"
 
 ### **Core Objectives**
 1. **Image Filtering:**
-   - Implement a multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
+   - Implement a custom donkey car part that includes multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
 
 2. **Obstacle Avoidance:**
-   - Using ROS2 as a framework for connecting the image filtering and LiDAR, the car will be able to stop or turn away from obstacles.
+   - Using ROS2 as a framework for connecting the LiDAR and donkey car, the car will be able to stop or turn away from obstacles.
 
 ### **Nice-to-Have Features**
 - **Faster/Cleaner Obstacle Avoidance:**
    - Have the robot car react faster and more efficiently to obstacles and in turn be able to react to moving obstacles.
 - **Better Developer Kit:**
-   - An improved kit with a more efficient G ram limit would allow for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning. 
+   - An improved kit with a more efficient G ram limit would allow for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning.
+- **Fully intergation between obstacle avoidance from ros2 to donkey car**
+  - Currently, we created a custom Donkey Car part to subscribe to the ROS2 topic, but it failed to override the Donkey Car while running. This may be due to overwriting from the joystick or an inability to correctly receive messages from the ROS node.
 ---
 
+### **Donkey Car Custom part Descriptions**
+
+ 1. **The '''canny_filter'''** part
+    - Applies a series of image processing steps to the input images: capture, enhancement, lifting, blurring, grayscale conversion, and Canny edge detection.
+
+    - The number of filters applied can be turned on or off based on the average brightness of the input images.
+
+ 2. **'''The donkey_bridge part'''** (successfully subscribes to ROS2 topics but cannot feed data to the Donkey Car)
+    - Subscribes to the /cmd_vel2 topic in ROS2.
+    - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
+    
 ### **ROS2 Node Descriptions**
 
-1. **The '''donkey_bridge_node'''
-   - Bridges the Donkey Car simulator to ROS2 
+1. **The '''donkey_bridge_node'''** (initial test to link ROS2 and Donkey Car, but this approach does not work as intended)
+    - Subscribes to the /cmd_vel2 topic in ROS2.
+  
+    - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
+  
+    - Provides a workaround for the rclpy.init() conflict by allowing ROS2 commands to directly control the car without running inside manage.py.
 
-3. **The '''safety_override_node'''
-   - ...
+2. **The '''safety_override_node'''**
+    - Fuses inputs from LiDAR (/lidar_status) and camera (/camera_status) to make safety-critical driving decisions.
+  
+    - Implements rules such as stopping for obstacles, avoiding objects detected on the left or right, and slowing down when necessary.
+    
+    - Publishes safe driving commands as Twist messages on /cmd_vel, ensuring obstacle avoidance and safety overrides take priority over normal control commands.
+  
+    - Publishes safe driving commands as String messages on /cmd_vel2, ensuring obstacle avoidance and safety overrides take priority over normal control commands. It is intended to serve the Donkey Car, but this functionality is still under development.
 
-5. **The ''''smart_avoid_node'''
-   - ...
+3. **The ''''smart_avoid_node'''** 
+   - Subscribes to LiDAR scan data (/scan) and divides the laser readings into front, left, and right sectors.
 
+   - Determines if there is an obstacle ahead and decides the safest direction to move (LEFT, RIGHT, or FORWARD) based on the amount of free space in each sector.
+
+   - Publishes the decision as a String message on /lidar_status for downstream nodes like safety_override_node.
+
+   - Based on code from 148-spring-2025-final-project-team-15, with minor modifications.
 ---
 
 ## **Technologies Used**
@@ -151,40 +186,46 @@ Click to watch "Obstacle Avoidance"
 
 ## **How to Run**
 
-__Detailed instructions can be found in ...__
-
 ### **Prerequisites**
 - Install NoMachine for connection to Nvidia Jetson Nano Developer Kit
 - Install ROS2 (Foxy recommended) on the Jetson
-- Set up the DepthAI SDK
-  - In Docker container ```projects``` directory
-  ```bash
-  git clone https://github.com/luxonis/depthai-python
-  ```
+- Install ROS2 ucsd_robocar_hub2 packages
+- Install donkey car inside the ros2 workspace
 - Ensure the VESC is configured and calibrated.
 
 ### **Steps**
 1. In Docker container, run ```source_ros2```
-1. Enter the ```src``` directory and clone the repository:
+2. Enter the ```src``` directory and clone the repository:
    ```bash
    cd src
-   git clone https://github.com/UCSD-ECEMAE-148/fall-2024-final-project-team-1/tree/main
+   git clone https://github.com/UCSD-ECEMAE-148/final-project-repository-su25-team5.git
    cd ..
    ```
-2. Build the ROS2 workspace:
+3. install donkey car in ROS2 workspace:
    ```bash
-   colcon build --packages-select ball_vision_package
+   source_ros2
+   git clone https://github.com/autorope/donkeycar 
+   cd donkeycar
+   git fetch --all --tags -f
+   git checkout 4.5.1
+   pip install -e .[nano]
+   source_ros2
    ```
-3. Launch the system:
+4. Launch the donkey car:
    ```bash
-   ros2 launch ball_vision_package ball_tracking.launch.py
+   cd UCSD-ECEMAE-148/final-project-repository-su25-team5/donkey_canny/
+   python3 manage.py drive
+   ``` 
+5. Build the ROS2 workspace:
+   ```bash
+   source_ros2
+   colcon build --packages-select ros_con2
+   ```
+6. Launch the ros system:
+   ```bash
+   ros2 launch ros_con2 safety_override_system.launch.py
    ```
    
-## **Future Improvements**
-
-- More records to improve autonomous driving in different lightings
-- 
-
 
 ### Final Project Documentation
 
@@ -231,7 +272,7 @@ The UCSD Robocar Module runs on Linux OS (Ubuntu 20.04) and was initially develo
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-*Much thanks and appreciation to Professor Jack Silberman and our two awesome TA's Alexander and Jose for a great summer 2025! Credits to Team 1 Fall 2024 for the README.md template in which they also gave credit to [@kiers-neely](https://github.com/kiers-neely)*
+*Much thanks and appreciation to Professor Jack Silberman and our two awesome TA's Alexander and Jose for a great summer 2025! Credits to Team 1 Fall 2024 for the README.md template,n which they also gave credit to [@kiers-neely](https://github.com/kiers-neely) and Team 15 spring 2024 for the lidar_detection ros node*
 
 <!-- CONTACTS -->
 ## Contacts
