@@ -149,13 +149,15 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
     
 ### **ROS2 Node Descriptions**
 
-1. **The '''donkey_bridge_node'''** (initial test to link ROS2 and Donkey Car, but this approach does not work as intended)
-    - Subscribes to the /cmd_vel2 topic in ROS2.
-  
-    - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
-  
-    - Provides a workaround for the rclpy.init() conflict by allowing ROS2 commands to directly control the car without running inside manage.py.
+1. **The ''''smart_avoid_node'''** 
+   - Subscribes to LiDAR scan data (/scan) and divides the laser readings into front, left, and right sectors.
 
+   - Determines if there is an obstacle ahead and decides the safest direction to move (LEFT, RIGHT, or FORWARD) based on the amount of free space in each sector.
+
+   - Publishes the decision as a String message on /lidar_status for downstream nodes like safety_override_node.
+
+   - Based on code from 148-spring-2025-final-project-team-15, with minor modifications.
+  
 2. **The '''safety_override_node'''**
     - Fuses inputs from LiDAR (/lidar_status) to make safety-critical driving decisions.
   
@@ -165,14 +167,12 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
   
     - Publishes safe driving commands as String messages on /cmd_vel2, ensuring obstacle avoidance and safety overrides take priority over normal control commands. It is intended to serve the Donkey Car, but this functionality is still under development.
 
-3. **The ''''smart_avoid_node'''** 
-   - Subscribes to LiDAR scan data (/scan) and divides the laser readings into front, left, and right sectors.
-
-   - Determines if there is an obstacle ahead and decides the safest direction to move (LEFT, RIGHT, or FORWARD) based on the amount of free space in each sector.
-
-   - Publishes the decision as a String message on /lidar_status for downstream nodes like safety_override_node.
-
-   - Based on code from 148-spring-2025-final-project-team-15, with minor modifications.
+3. **The '''donkey_bridge_node'''** (initial test to link ROS2 and Donkey Car, but this approach does not work as intended)
+    - Subscribes to the /cmd_vel2 topic in ROS2.
+  
+    - Parses throttle and steering commands from messages and updates shared control values (angle and throttle) used by Donkey Car.
+  
+    - Provides a workaround for the rclpy.init() conflict by allowing ROS2 commands to directly control the car without running inside manage.py.
 ---
 
 ## **Technologies Used**
@@ -272,7 +272,7 @@ The UCSD Robocar Module runs on Linux OS (Ubuntu 20.04) and was initially develo
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-*Much thanks and appreciation to Professor Jack Silberman and our two awesome TA's Alexander and Jose for a great summer 2025! Credits to Team 1 Fall 2024 for the README.md template,n which they also gave credit to [@kiers-neely](https://github.com/kiers-neely) and Team 15 spring 2024 for the lidar_detection ros node*
+*Much thanks and appreciation to Professor Jack Silberman and our two awesome TA's Alexander and Jose for a great summer 2025! Credits to Team 1 Fall 2024 for the README.md template, in which they also gave credit to [@kiers-neely](https://github.com/kiers-neely) and Team 15 spring 2024 for the lidar_detection ros node*
 
 <!-- CONTACTS -->
 ## Contacts
