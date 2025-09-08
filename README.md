@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-<h1 align="center">Image Filter Pipeline & Obstacle Avoidance</h1>
+<h1 align="center">Image Filter Pipeline & Safety Override On Donkey Car</h1>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -77,7 +77,7 @@ Team 5 Summer 2025
 
 This project focuses on developing an imaging process filter designated to improve the reliability of Donkey Car training across different environments. An image filter pipeline will be made to the OAK-D camera feed to normalize lighting conditions so that training and inference remain robust at any time of day.
 In addition, LiDAR sensing will be integrated for obstacle detection, further improving the perception capabilities of the Donkey Car. Emergency avoidance will be provided to handle suddenly appearing objects, ensuring the safety of people, the driver, and the car itself.
-ROS2 will be used as the link between donkey car and LiDAR sensing, where LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
+ROS2 will be used as the link between Donkey Car and LiDAR sensing, where LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
 ![Alt Text](images/ECE148_final.jpg)
 
@@ -95,15 +95,15 @@ Click to watch "Night Model Usage"
 
 [![Night Model Usage](http://img.youtube.com/vi/2x252IADBzo/0.jpg)](https://youtu.be/2x252IADBzo "Night Model Usage")
 
-Click to watch "Obstacle Avoidance"
+Click to watch "Safety Override"
 
 [![Obstacle Avoidance](http://img.youtube.com/vi/Y8Ywqo7uJKo/0.jpg)](https://youtu.be/Y8Ywqo7uJKo "Obstacle Avoidance")
 
-Note that the setup of parts (such as camera position, compute power, and Donkey Car configuration) can vary from car to car, and tuning may be required to achieve the same effect.
+**Note:** Setup of parts (such as camera position, compute power, and Donkey Car configuration) can vary from car to car, and tuning may be required to achieve the same effect.
 
 ### **Key Features**
 - **Image Filtering:** Imaging is captured, enhanced, lifted, blurred, gray scaled, then a canny edge filter is applied.
-- **Obstacle Avoidance:** LiDAR, or light detection and ranging, is used to measure distances between the car and objects in order to avoid collisions.
+- **Safety Override:** LiDAR, or light detection and ranging, is used to measure distances between the car and objects in order to avoid collisions.
 - **ROS2 Framework:** Custom ROS2 nodes are used for the functionalities listed above.
 - **Donkey Car Framework:** Uses the OpenAI gym wrapper around the Self Driving Sandbox donkey simulator in order for deep learning image processing, allowing the use for autonomous use.
 ---
@@ -123,24 +123,25 @@ Note that the setup of parts (such as camera position, compute power, and Donkey
 ### **Core Objectives**
 1. **Image Filtering:**
    - Implement a custom donkey car part that includes multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
+<img src="images/Filters With Shadow.png"/>
 
-2. **Obstacle Avoidance:**
-   - Using ROS2 as a framework for connecting the LiDAR and donkey car, the car will be able to stop or turn away from obstacles.
+2. **Safety Override:**
+   - Using ROS2 as a framework for connecting the LiDAR and Donkey Car, the car will be able to stop or turn away from obstacles.
+<img src="images/ROS2 Donkey Car.png"/>
 
 ### **Nice-to-Have Features**
-- **Faster/Cleaner Obstacle Avoidance:**
+- **Faster/Cleaner Obstacle Avoidance With Safety Override:**
    - Have the robot car react faster and more efficiently to obstacles and in turn be able to react to moving obstacles.
 - **Better Developer Kit:**
    - An improved kit with a more efficient G ram limit would allow for higher resolution photos when training the model, and a higher resolution allows for clearer photos used for image deep learning.
-- **Fully intergation between obstacle avoidance from ros2 to donkey car**
-  - Currently, we created a custom Donkey Car part to subscribe to the ROS2 topic, but it failed to override the Donkey Car while running. This may be due to overwriting from the joystick or an inability to correctly receive messages from the ROS node.
+- **Full Integration of Safety Override From ROS2 and Donkey Car**
+  - Currently, we created a custom Donkey Car that subscribes to the ROS2 topic, but it failed to override Donkey Car while running. This may be due to overwriting from the joystick or an inability to correctly receive messages from the ROS2 node.
 ---
 
-### **Donkey Car Custom part Descriptions**
+### **Donkey Car Custom Part Descriptions**
 
  1. The ```canny_filter``` part
     - Applies a series of image processing steps to the input images: capture, enhancement, lifting, blurring, grayscale conversion, and Canny edge detection.
-
     - The number of filters applied can be turned on or off based on the average brightness of the input images.
 
  2. The ```donkey_bridge``` part (successfully subscribes to ROS2 topics but cannot feed data to the Donkey Car)
