@@ -79,7 +79,7 @@ This project focuses on developing an imaging process filter designated to impro
 In addition, LiDAR sensing will be integrated for obstacle detection, further improving the perception capabilities of the Donkey Car. Emergency avoidance will be provided to handle suddenly appearing objects, ensuring the safety of people, the driver, and the car itself.
 ROS2 will be used as the link between Donkey Car and LiDAR sensing, where LiDAR scans are published to topics, and the control node fuses this data to generate safe and accurate driving commands.
 
-![Alt Text](images/ECE148_final.jpg)
+<img src = "images/ECE148_final.jpg" width="800" height="600" />
 
 ### **YouTube Videos:**
 
@@ -123,11 +123,11 @@ Click to watch "Safety Override"
 ### **Core Objectives**
 1. **Image Filtering:**
    - Implement a custom donkey car part that includes multitude of filters that can enhance an image throughout anytime of day which allows an ease of deep learning image processing for autonomous use. 
-<img src="images/Filters With Shadow.png"/>
+<img src="images/Filters With Shadow.png" width="800" height="600"/>
 
 2. **Safety Override:**
    - Using ROS2 as a framework for connecting the LiDAR and Donkey Car, the car will be able to stop or turn away from obstacles.
-<img src="images/ROS2 Donkey Car.png"/>
+<img src="images/ROS2 Donkey Car.png" width="800" height="600"/>
 
 ### **Nice-to-Have Features**
 - **Faster/Cleaner Obstacle Avoidance With Safety Override:**
